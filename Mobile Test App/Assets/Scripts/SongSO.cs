@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Song", menuName = "SO/Song")]
@@ -7,10 +8,13 @@ public class SongSO : ScriptableObject
     public string SongName;
 
     [Header("Audio Clip")]
-    public AudioClip Song;
+    public EventReference Song;
 
     [Header("BPM")]
     public float BPM;
+
+    [Header("Song Length")]
+    public float Length;
 
 
     

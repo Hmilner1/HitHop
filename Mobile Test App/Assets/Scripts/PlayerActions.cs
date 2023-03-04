@@ -105,6 +105,7 @@ public class PlayerActions : MonoBehaviour
             beat = collision.gameObject;
             if (m_Jump)
             {
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
                 beat.SetActive(false);
                 if (!beat.activeSelf)
                 {
@@ -118,6 +119,7 @@ public class PlayerActions : MonoBehaviour
                 beat.SetActive(false);
                 if (!beat.activeSelf)
                 {
+                    AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
                     Destroy(beat);
                     BeatDestroyed = true;
                     Debug.Log("Nice");

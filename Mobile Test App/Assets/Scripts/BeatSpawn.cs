@@ -21,11 +21,12 @@ public class BeatSpawn : MonoBehaviour
         m_SelectedSong = GameObject.Find("SongManger").GetComponent<SelectedSong>();
         m_Song = m_SelectedSong.m_SongSO;
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = m_Song.Song;
+        // audioSource.clip = m_Song.Song;
+        AudioManager.instance.InitMusic(m_Song.Song);
         m_BPM = m_Song.BPM;
         timer = TimerTime;
         timer = Mathf.FloorToInt(timer % 60);
-        m_SongLength = audioSource.clip.length;
+        m_SongLength = m_Song.Length;
         m_BeatsNeeded = m_BPM* (m_SongLength/60);
         audioSource.Play();
     }

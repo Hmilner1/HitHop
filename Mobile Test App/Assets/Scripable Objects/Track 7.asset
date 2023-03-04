@@ -13,5 +13,12 @@ MonoBehaviour:
   m_Name: Track 7
   m_EditorClassIdentifier: 
   SongName: Track 7
-  Song: {fileID: 8300000, guid: 42a6e4e230cce4646953a0dd33a9d75a, type: 3}
+  Song:
+    Guid:
+      Data1: -979622685
+      Data2: 1081029058
+      Data3: 509311659
+      Data4: 1337837856
+    Path: event:/Music/Track7
   BPM: 103
+  Length: 114

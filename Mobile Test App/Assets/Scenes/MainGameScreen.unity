@@ -287,6 +287,11 @@ Transform:
   m_Father: {fileID: 1644984325}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &514905688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7326158488037971065, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+  m_PrefabInstance: {fileID: 7326158488950127192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &641151123
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +648,64 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &870340055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 870340056}
+  - component: {fileID: 870340057}
+  m_Layer: 0
+  m_Name: FmodEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &870340056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870340055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1093852719}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &870340057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870340055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c63b5ef7e9b9834ebea0ffd1b5bf1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <beatDestroySound>k__BackingField:
+    Guid:
+      Data1: -1399098191
+      Data2: 1239618068
+      Data3: -1978172261
+      Data4: 1743345752
+    Path: event:/SFX/BeatHit
+  <Track7>k__BackingField:
+    Guid:
+      Data1: -979622685
+      Data2: 1081029058
+      Data3: 509311659
+      Data4: 1337837856
+    Path: event:/Music/Track7
 --- !u!1 &1076447043
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +852,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1756689387}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1093852717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093852719}
+  - component: {fileID: 1093852718}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1093852718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093852717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11233af648fe7ab44867667c206167a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1093852719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093852717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1094618, y: -0.6239387, z: 0.021365276}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 870340056}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1143717512
 GameObject:
@@ -954,7 +1062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1723227228}
   - component: {fileID: 1723227227}
-  - component: {fileID: 1723227226}
+  - component: {fileID: 1723227229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -962,14 +1070,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1723227226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723227225}
-  m_Enabled: 1
 --- !u!20 &1723227227
 Camera:
   m_ObjectHideFlags: 0
@@ -1028,6 +1128,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723227229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723227225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 514905688}
 --- !u!1 &1756689386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,8 +1209,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.9}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 0}
+  m_AnchoredPosition: {x: 0, y: -30.000488}
+  m_SizeDelta: {x: 300, y: -59.999023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783224571
 MonoBehaviour:
@@ -1580,6 +1693,26 @@ PrefabInstance:
       propertyPath: m_MovePositionHigh
       value: 
       objectReference: {fileID: 209699724}
+    - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+      propertyPath: beatDestroySound.Path
+      value: event:/BeatHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+      propertyPath: beatDestroySound.Guid.Data1
+      value: -1399098191
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+      propertyPath: beatDestroySound.Guid.Data2
+      value: 1239618068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+      propertyPath: beatDestroySound.Guid.Data3
+      value: -1978172261
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+      propertyPath: beatDestroySound.Guid.Data4
+      value: 1743345752
+      objectReference: {fileID: 0}
     - target: {fileID: 7326158488037971069, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: m_Enabled
       value: 1
