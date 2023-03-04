@@ -13,5 +13,12 @@ MonoBehaviour:
   m_Name: Track 8
   m_EditorClassIdentifier: 
   SongName: Lets Go, So Do I
-  Song: {fileID: 8300000, guid: f23941e21320b5b42af7d834b6c3b1db, type: 3}
+  Song:
+    Guid:
+      Data1: 311646618
+      Data2: 1340304241
+      Data3: -2118506343
+      Data4: 177109165
+    Path: event:/Music/Track6
   BPM: 117
+  Length: 140
