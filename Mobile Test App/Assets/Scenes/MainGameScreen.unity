@@ -1875,6 +1875,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
+      propertyPath: m_TimerTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: m_beatspawner
       value: 
       objectReference: {fileID: 2107464929}

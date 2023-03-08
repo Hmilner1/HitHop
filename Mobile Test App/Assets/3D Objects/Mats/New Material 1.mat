@@ -16,8 +16,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -171,10 +172,10 @@ Material:
     - _UvAnimScrollYSpeed: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.9490197, g: 0.18823531, b: 0.4666667, a: 1}
+    - _Color: {r: 0.8679245, g: 0.35617658, b: 0.5434657, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatcapColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadeColor: {r: 0.9811321, g: 0.58775365, b: 0.73300105, a: 1}
   m_BuildTextureStacks: []

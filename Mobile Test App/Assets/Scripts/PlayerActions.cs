@@ -24,6 +24,7 @@ public class PlayerActions : MonoBehaviour
 
     public delegate void AddPoint(int Score);
     public static event AddPoint OnAddPoint;
+    private Animator m_CharacterAnimator;
 
     private void OnEnable()
     {
@@ -55,6 +56,7 @@ public class PlayerActions : MonoBehaviour
         BeatsHit = 0;
         m_Score = 0;
         m_Player = GameObject.Find("Player");
+        m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
     }
     private void Update()
     {
@@ -63,18 +65,21 @@ public class PlayerActions : MonoBehaviour
         {
             m_timer = m_timer - 1f * Time.deltaTime;
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, m_LerpAmount * Time.deltaTime);
+            m_CharacterAnimator.SetTrigger("Jump");
         }
         else if (!m_Jump)
         { 
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionLow.transform.position, m_LerpAmount * Time.deltaTime);
             m_Jump = false;
             m_timer = m_TimerTime;
+            m_CharacterAnimator.SetTrigger("Running");
         }
         if (m_timer <= 0f)
         {
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionLow.transform.position, m_LerpAmount * Time.deltaTime);
             m_Jump = false;
             m_timer = m_TimerTime;
+            m_CharacterAnimator.SetTrigger("Running");
         }
     }
 
@@ -83,7 +88,7 @@ public class PlayerActions : MonoBehaviour
         if (position.x > Screen.width / 2)
         {
             m_Jump = true;
-           // m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, 10* Time.deltaTime);
+            // m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, 10* Time.deltaTime);
         }
         else if (position.x < Screen.width / 2)
         {

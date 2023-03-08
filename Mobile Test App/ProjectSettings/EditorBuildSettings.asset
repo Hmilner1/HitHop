@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Splash Screen.unity
+    guid: 217afa4a1a9d15949b689964eca74322
+  - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: 9bb74b28bca081e4596e01c728f6d1b8
   - enabled: 1
