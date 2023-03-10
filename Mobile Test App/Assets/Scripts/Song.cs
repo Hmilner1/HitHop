@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Song : MonoBehaviour
 {
@@ -33,6 +34,23 @@ public class Song : MonoBehaviour
         m_SongName.text = m_CurrentSong.SongName;
         m_CurrentSong = m_SongList[m_SelectedIndex];
         m_SelectedSong.m_SongSO = m_CurrentSong;
+    }
+
+    public void OnClickPlay()
+    {
+        m_CassetAnimator.SetTrigger("Play");
+        StartCoroutine(Play());
+    }
+
+    IEnumerator Play()
+    {
+        while (true)
+        {
+
+            yield return new WaitForSeconds(m_WaitTime);
+            SceneManager.LoadScene("MainGameScreen");
+            StopAllCoroutines();
+        }
     }
 
     public void OnClickForward()
