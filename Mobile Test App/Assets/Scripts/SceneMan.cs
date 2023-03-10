@@ -9,4 +9,14 @@ public class SceneMan : MonoBehaviour
     {
         SceneManager.LoadScene("MainGameScreen");
     }
+
+    public void OnClickSettings()
+    {
+        SceneManager.LoadScene("Settings Menu", LoadSceneMode.Additive);
+    }
+
+    public void OnClickUnloadSettings()
+    {
+        SceneManager.UnloadSceneAsync("Settings Menu");
+    }
 }
