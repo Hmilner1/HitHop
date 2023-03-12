@@ -46,7 +46,6 @@ public class Song : MonoBehaviour
     {
         while (true)
         {
-
             yield return new WaitForSeconds(m_WaitTime);
             SceneManager.LoadScene("MainGameScreen");
             StopAllCoroutines();

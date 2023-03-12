@@ -30,7 +30,7 @@ public class PlayerActions : MonoBehaviour
     {
         PlayerInputs.OnStartTouch += Move;
         PlayerInputs.OnStartTouch += StartClick;
-        PlayerInputs.OnEndTouch += MoveBack;
+        //PlayerInputs.OnEndTouch += MoveBack;
         PlayerInputs.OnEndTouch += StopClick;
 
     }
@@ -38,7 +38,7 @@ public class PlayerActions : MonoBehaviour
     {
         PlayerInputs.OnStartTouch -= Move;
         PlayerInputs.OnStartTouch -= StartClick;
-        PlayerInputs.OnEndTouch -= MoveBack;
+        //PlayerInputs.OnEndTouch -= MoveBack;
         PlayerInputs.OnEndTouch -= StopClick;
     }
 
@@ -58,7 +58,7 @@ public class PlayerActions : MonoBehaviour
         m_Player = GameObject.Find("Player");
         m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         AddAPoint();
         if (m_Jump)
@@ -88,19 +88,17 @@ public class PlayerActions : MonoBehaviour
         if (position.x > Screen.width / 2)
         {
             m_Jump = true;
-            // m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, 10* Time.deltaTime);
         }
         else if (position.x < Screen.width / 2)
         {
-            //m_Player.transform.position = m_MovePositionLow.transform.position;
             m_Jump = false;
         }
     }
 
-    private void MoveBack(Vector2 position)
-    {
-     //  m_Player.transform.position = m_MovePositionLow.transform.position;
-    }
+    //private void MoveBack(Vector2 position)
+    //{
+    // //  m_Player.transform.position = m_MovePositionLow.transform.position;
+    //}
 
     private void OnTriggerStay2D(Collider2D collision)
     {

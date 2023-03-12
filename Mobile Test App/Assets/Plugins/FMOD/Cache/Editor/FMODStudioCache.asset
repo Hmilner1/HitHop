@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638134998944692641
+  lastModified: 638141214221813009
   FileSizes:
   - Name: Desktop
-    Value: 946
+    Value: 1016
   Exists: 1
 --- !u!114 &-4824539045657249576
 MonoBehaviour:
@@ -35,10 +35,10 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638134998944672620
+  lastModified: 638141214221792540
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1340
   Exists: 1
 --- !u!114 &-3117572991175082884
 MonoBehaviour:
@@ -55,7 +55,7 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638134998944874479
+  lastModified: 638141214222195952
   FileSizes:
   - Name: Desktop
     Value: 2784
@@ -113,7 +113,7 @@ MonoBehaviour:
   - {fileID: -4824539045657249576}
   StringsBanks:
   - {fileID: -6110840199322994783}
-  cacheTime: 638134998945073781
+  cacheTime: 638141214222195952
   cacheVersion: 131601
 --- !u!114 &1630895344653129378
 MonoBehaviour:
@@ -157,7 +157,7 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/LevelSongs.bank
   Name: LevelSongs
   StudioPath: bank:/LevelSongs
-  lastModified: 638134998945073781
+  lastModified: 638141214221641828
   FileSizes:
   - Name: Desktop
     Value: 3202528

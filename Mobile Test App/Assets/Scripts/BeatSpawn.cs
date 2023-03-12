@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BeatSpawn : MonoBehaviour
 {
@@ -43,9 +44,21 @@ public class BeatSpawn : MonoBehaviour
 
         if (m_BeatsNeeded <= 0)
         {
+            StartCoroutine(EndGame());
             Debug.Log("GameOver");
         }
    }
+
+    IEnumerator EndGame()
+    { 
+        while (true) 
+        {
+            yield return new WaitForSeconds(5f);
+            SceneManager.LoadScene("LevelEndScreen", LoadSceneMode.Additive);
+            StopAllCoroutines();
+        }
+    }
+
     private void SpawnBeat()
     {
         if (m_BeatsNeeded > 0)
