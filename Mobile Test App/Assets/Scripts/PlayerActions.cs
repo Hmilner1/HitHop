@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
@@ -63,9 +64,9 @@ public class PlayerActions : MonoBehaviour
         AddAPoint();
         if (m_Jump)
         {
+            m_CharacterAnimator.SetTrigger("Jump");
             m_timer = m_timer - 1f * Time.deltaTime;
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, m_LerpAmount * Time.deltaTime);
-            m_CharacterAnimator.SetTrigger("Jump");
         }
         else if (!m_Jump)
         { 
@@ -82,7 +83,6 @@ public class PlayerActions : MonoBehaviour
             m_CharacterAnimator.SetTrigger("Running");
         }
     }
-
     private void Move(Vector2 position)
     {
         if (position.x > Screen.width / 2)

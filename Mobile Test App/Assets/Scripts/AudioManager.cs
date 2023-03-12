@@ -26,9 +26,13 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        if(instance == null)
+        {
+            DontDestroyOnLoad(this);
+        }
         if (instance != null)
         {
+            Destroy(instance);
             Debug.LogError("More than one Audio Manager Found!");
         }
         instance = this;

@@ -29,6 +29,9 @@ public class SceneMan : MonoBehaviour
 
     public void OnClickMenu()
     {
+        Time.timeScale = 1f;
+        AudioManager.instance.musicBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        AudioManager.instance.musicBus.setPaused(false);
         SceneManager.LoadScene("StartMenu");
     }
 

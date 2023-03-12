@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class VolumeSlider : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class VolumeSlider : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
 
     private void Update()
