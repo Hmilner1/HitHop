@@ -379,6 +379,7 @@ MonoBehaviour:
   m_SongList:
   - {fileID: 11400000, guid: 320fae75b54229d44911ddc54a586442, type: 2}
   - {fileID: 11400000, guid: 29126e31807cb6c42a9e0918f850a630, type: 2}
+  - {fileID: 11400000, guid: 779baa4d192ef8e46ae0ba473ad60ed1, type: 2}
   m_SongName: {fileID: 1121757107}
   m_WaitTime: 0.5
 --- !u!1 &601359193

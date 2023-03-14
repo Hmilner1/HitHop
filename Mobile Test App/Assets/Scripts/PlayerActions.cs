@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     PlayerInputs m_PlayerInputs;
+
     [SerializeField]
     private BeatSpawn m_beatspawner;
 
@@ -22,25 +23,29 @@ public class PlayerActions : MonoBehaviour
     private float MaxBeats;
     [SerializeField]
     private float m_LerpAmount;
+    private float Accuracy;
 
     public delegate void AddPoint(int Score);
     public static event AddPoint OnAddPoint;
     private Animator m_CharacterAnimator;
 
+    public delegate void GetAccuracy(float Accuracy);
+    public static event GetAccuracy OnGetAccuracy;
+
     private void OnEnable()
     {
         PlayerInputs.OnStartTouch += Move;
         PlayerInputs.OnStartTouch += StartClick;
-        //PlayerInputs.OnEndTouch += MoveBack;
         PlayerInputs.OnEndTouch += StopClick;
+        BeatSpawn.OnGameEnd += CalculateAccuracy;
 
     }
     private void OnDisable()
     {
         PlayerInputs.OnStartTouch -= Move;
         PlayerInputs.OnStartTouch -= StartClick;
-        //PlayerInputs.OnEndTouch -= MoveBack;
         PlayerInputs.OnEndTouch -= StopClick;
+        BeatSpawn.OnGameEnd -= CalculateAccuracy;
     }
 
     private void Awake()
@@ -158,9 +163,16 @@ public class PlayerActions : MonoBehaviour
 
     private void CalculateAccuracy()
     {
-        float Accuracy;
 
         Accuracy = BeatsHit / MaxBeats;
         Accuracy = Accuracy * 100;
+        StartCoroutine(SendAccuracy());
+    }
+
+    IEnumerator SendAccuracy()
+    {
+        yield return new WaitForSeconds(0.1f);
+        OnGetAccuracy?.Invoke(Accuracy);
+        StopAllCoroutines();
     }
 }

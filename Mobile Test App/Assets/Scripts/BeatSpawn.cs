@@ -16,6 +16,10 @@ public class BeatSpawn : MonoBehaviour
     public float TimerTime;
     public float timer = 10f;
     private float m_SongLength;
+    private bool m_LoadedEndScreen;
+
+    public delegate void GetAccuracy();
+    public static event GetAccuracy OnGameEnd;
 
     private void Start()
     {
@@ -30,6 +34,7 @@ public class BeatSpawn : MonoBehaviour
         m_SongLength = m_Song.Length;
         m_BeatsNeeded = m_BPM* (m_SongLength/60);
         audioSource.Play();
+        m_LoadedEndScreen = false;
     }
 
    private void Update()
@@ -44,19 +49,23 @@ public class BeatSpawn : MonoBehaviour
 
         if (m_BeatsNeeded <= 0)
         {
-            StartCoroutine(EndGame());
-            Debug.Log("GameOver");
+            if (m_LoadedEndScreen == false)
+            {
+                StartCoroutine(EndGame());
+            }
+
         }
-   }
+    }
 
     IEnumerator EndGame()
-    { 
-        while (true) 
-        {
-            yield return new WaitForSeconds(5f);
-            SceneManager.LoadScene("LevelEndScreen", LoadSceneMode.Additive);
-            StopAllCoroutines();
-        }
+    {
+
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("LevelEndScreen", LoadSceneMode.Additive);
+        m_LoadedEndScreen=true;
+        OnGameEnd?.Invoke();
+        StopAllCoroutines();
+
     }
 
     private void SpawnBeat()
