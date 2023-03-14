@@ -11,6 +11,7 @@ public class BeatSpawn : MonoBehaviour
     public float m_BeatsNeeded;
     private AudioSource audioSource;
     public GameObject m_Beat;
+    public GameObject m_DontHitBeat;
     public GameObject m_HighSpawn;
     public GameObject m_LowSpawn;
     public float TimerTime;
@@ -59,7 +60,6 @@ public class BeatSpawn : MonoBehaviour
 
     IEnumerator EndGame()
     {
-
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene("LevelEndScreen", LoadSceneMode.Additive);
         m_LoadedEndScreen=true;
@@ -75,18 +75,35 @@ public class BeatSpawn : MonoBehaviour
             float spawnAmount = m_BPM / 60;
             for (int i = 0; i < spawnAmount; i++)
             {
-                float spawnpoint = Random.Range(1, 3);
-                if (spawnpoint == 1)
+                float spawnpoint = Random.Range(1, 6);
+                if (spawnpoint == 1 || spawnpoint == 4)
                 {
-                    
-                    Instantiate(m_Beat, new Vector3(m_HighSpawn.transform.position.x , m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
+
+                    Instantiate(m_Beat, new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
                     m_BeatsNeeded--;
                 }
-                else if (spawnpoint == 2)
+                else if (spawnpoint == 2 || spawnpoint == 5)
                 {
-                    
-                    Instantiate(m_Beat, new Vector3(m_LowSpawn.transform.position.x , m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
+
+                    Instantiate(m_Beat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
                     m_BeatsNeeded--;
+                }
+                else if (spawnpoint == 3)
+                {
+                    float spawnpointDontHit = Random.Range(1, 3);
+
+                    if (spawnpointDontHit == 1)
+                    {
+
+                        Instantiate(m_DontHitBeat, new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
+                        m_BeatsNeeded--;
+                    }
+                    else if (spawnpointDontHit == 2)
+                    {
+
+                        Instantiate(m_DontHitBeat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
+                        m_BeatsNeeded--;
+                    }
                 }
             }
         }

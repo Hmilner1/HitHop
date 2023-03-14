@@ -20,12 +20,13 @@ public class PlayerActions : MonoBehaviour
     public GameObject m_MovePositionLow;
     public bool BeatDestroyed;
     private float BeatsHit;
+    private int Combo;
     private float MaxBeats;
     [SerializeField]
     private float m_LerpAmount;
     private float Accuracy;
 
-    public delegate void AddPoint(int Score);
+    public delegate void AddPoint(int Score, int CurrentCombo);
     public static event AddPoint OnAddPoint;
     private Animator m_CharacterAnimator;
 
@@ -38,7 +39,7 @@ public class PlayerActions : MonoBehaviour
         PlayerInputs.OnStartTouch += StartClick;
         PlayerInputs.OnEndTouch += StopClick;
         BeatSpawn.OnGameEnd += CalculateAccuracy;
-
+        BeatMovement.OnBeatMiss += BeatMissed;
     }
     private void OnDisable()
     {
@@ -46,6 +47,7 @@ public class PlayerActions : MonoBehaviour
         PlayerInputs.OnStartTouch -= StartClick;
         PlayerInputs.OnEndTouch -= StopClick;
         BeatSpawn.OnGameEnd -= CalculateAccuracy;
+        BeatMovement.OnBeatMiss -= BeatMissed;
     }
 
     private void Awake()
@@ -100,11 +102,6 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    //private void MoveBack(Vector2 position)
-    //{
-    // //  m_Player.transform.position = m_MovePositionLow.transform.position;
-    //}
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         GameObject beat;
@@ -119,7 +116,6 @@ public class PlayerActions : MonoBehaviour
                 {
                     Destroy(beat);
                     BeatDestroyed = true;
-                    Debug.Log("Nice");
                 }
             }
             else if (m_Clicked && !m_Jump)
@@ -130,7 +126,34 @@ public class PlayerActions : MonoBehaviour
                     AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
                     Destroy(beat);
                     BeatDestroyed = true;
-                    Debug.Log("Nice");
+                }
+            }
+        }
+
+        GameObject MissBeat;
+        if (collision.gameObject.tag == "Miss")
+        {
+            MissBeat = collision.gameObject;
+            if (m_Jump)
+            {
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+                MissBeat.SetActive(false);
+                if (!MissBeat.activeSelf)
+                {
+                    Destroy(MissBeat);
+                    BeatMissed();
+                    OnAddPoint?.Invoke(m_Score, Combo);
+                }
+            }
+            else if (m_Clicked && !m_Jump)
+            {
+                MissBeat.SetActive(false);
+                if (!MissBeat.activeSelf)
+                {
+                    AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+                    Destroy(MissBeat);
+                    BeatMissed();
+                    OnAddPoint?.Invoke(m_Score, Combo);
                 }
             }
         }
@@ -155,24 +178,42 @@ public class PlayerActions : MonoBehaviour
         if (BeatDestroyed)
         {
             BeatsHit = BeatsHit + 1;
-            m_Score = m_Score + 1;
-            OnAddPoint?.Invoke(m_Score);
+            Combo = Combo + 1;
+            switch (Combo)
+            {
+                case < 10:
+                    m_Score = m_Score + 10;
+                    break;
+                case > 30:
+                    m_Score = m_Score + 40;
+                    break;
+                case > 20:
+                    m_Score = m_Score + 30;
+                    break;
+                case > 10:
+                    m_Score = m_Score + 20;
+                    break;
+            }
+            OnAddPoint?.Invoke(m_Score,Combo);
             BeatDestroyed = false;
         }
     }
 
+    private void BeatMissed()
+    {
+        Combo = 0;
+    }
+
     private void CalculateAccuracy()
     {
-
-        Accuracy = BeatsHit / MaxBeats;
-        Accuracy = Accuracy * 100;
+        
         StartCoroutine(SendAccuracy());
     }
 
     IEnumerator SendAccuracy()
     {
         yield return new WaitForSeconds(0.1f);
-        OnGetAccuracy?.Invoke(Accuracy);
+        OnGetAccuracy?.Invoke(m_Score);
         StopAllCoroutines();
     }
 }

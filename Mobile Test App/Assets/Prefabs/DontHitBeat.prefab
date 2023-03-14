@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6116084607108938225}
   - component: {fileID: 3635789821616858056}
   m_Layer: 0
-  m_Name: Beat
-  m_TagString: Beat
+  m_Name: DontHitBeat
+  m_TagString: Miss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +209,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f25826899e780f4eb499ed25c152749, type: 2}
+  - {fileID: 2100000, guid: 460db4ea200b3134ba7ed790f566bdb6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

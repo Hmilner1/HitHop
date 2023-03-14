@@ -7,6 +7,9 @@ public class BeatMovement : MonoBehaviour
     BeatSpawn beatSpawner;
     private float m_BPM;
 
+    public delegate void BeatMissed();
+    public static event BeatMissed OnBeatMiss;
+
     private void Start()
     {
         beatSpawner = GameObject.Find("BeatSpawner").GetComponent<BeatSpawn>();
@@ -21,6 +24,10 @@ public class BeatMovement : MonoBehaviour
         if (transform.position.x < -4)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
+            if (gameObject.tag == "Beat")
+            {
+                OnBeatMiss?.Invoke();
+            }
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject);
         }

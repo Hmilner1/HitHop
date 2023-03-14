@@ -9,20 +9,20 @@ public class UIManager : MonoBehaviour
     private void OnEnable() => PlayerActions.OnAddPoint += AddPoints;
     private void OnDisable() => PlayerActions.OnAddPoint -= AddPoints;
 
-    private TMP_Text M_ScoreText;
-    private Canvas m_GameCanvas;
-
-    private int m_Score = 0;
+    [SerializeField]
+    private TMP_Text m_ScoreText;
+    [SerializeField]
+    private TMP_Text m_ComboText;
 
     private void Start()
     {
-        m_GameCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        M_ScoreText = m_GameCanvas.GetComponentInChildren<TMP_Text>();
+
     }
 
-    private void AddPoints(int score)
+    private void AddPoints(int score, int Combo)
     {
-        m_Score = score;
-        M_ScoreText.text = score.ToString();
+        m_ScoreText.text = score.ToString();
+
+        m_ComboText.text = Combo.ToString() + "X";
     }
 }

@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ScoreText: {fileID: 0}
+  m_XpBar: {fileID: 1863904303}
 --- !u!4 &1064229190
 Transform:
   m_ObjectHideFlags: 0

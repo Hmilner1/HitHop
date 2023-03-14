@@ -7,18 +7,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 7
-  m_Shader: {fileID: 4800000, guid: e0edbf68d81d1f340ae8b110086b7063, type: 3}
+  m_Name: Bone 1
+  m_Shader: {fileID: 4800000, guid: 8a83b8ffa4c6d7a44999e8b099ea3f4e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _RIMFACTOR_ON
+  - _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -44,8 +45,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
+    - _FaceTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapTex:
@@ -115,22 +120,26 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaMode: 0
-    - _AlphaToMask: 0
+    - _AtmosphereThickness: 1
     - _BlendMode: 0
     - _BumpScale: 1
+    - _ColorMask: 15
     - _CullMode: 2
     - _Cutoff: 0.5
     - _DebugMode: 0
     - _DetailNormalMapScale: 1
     - _DoubleSided: 0
     - _DstBlend: 0
+    - _Exposure: 1.3
     - _GiEqualization: 0.9
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HorizonLineContribution: 0.25
+    - _HorizonLineExponent: 4
     - _IndirectLightIntensity: 0.1
     - _LightColorAttenuation: 0
-    - _MToonVersion: 39
+    - _MToonVersion: 32
     - _M_AlphaToMask: 0
     - _M_CullMode: 2
     - _M_DebugMode: 0
@@ -138,6 +147,8 @@ Material:
     - _M_EditMode: 0
     - _M_SrcBlend: 1
     - _M_ZWrite: 1
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -145,23 +156,39 @@ Material:
     - _OutlineCullMode: 1
     - _OutlineLightingMix: 1
     - _OutlineScaledMaxDistance: 1
-    - _OutlineWidth: 0.0073
+    - _OutlineWidth: 0.5
     - _OutlineWidthMode: 0
+    - _Padding: 0
     - _Parallax: 0.02
     - _ReceiveShadowRate: 1
     - _RenderQueueOffset: 0
-    - _RimFresnelPower: 1
-    - _RimLift: 0
+    - _RimFactor: 1
+    - _RimFresnelPower: 1.5
+    - _RimLift: 0.566
     - _RimLightingMix: 0
+    - _RimReverse: 0.868
     - _ShadeShift: 0
     - _ShadeToony: 0.9
     - _ShadingGradeRate: 1
-    - _ShadingShiftFactor: -0.05
+    - _ShadingShiftFactor: -0.5
     - _ShadingShiftTexScale: 1
-    - _ShadingToonyFactor: 0.95
+    - _ShadingToonyFactor: 0.04
+    - _SkyGradientExponent: 2.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _SunDiscExponent: 125000
+    - _SunDiscMultiplier: 25
+    - _SunDisk: 2
+    - _SunHaloContribution: 0.75
+    - _SunHaloExponent: 125
+    - _SunSize: 0.04
+    - _SunSizeConvergence: 5
     - _TransparentWithZWrite: 0
     - _UVSec: 0
     - _UvAnimRotation: 0
@@ -170,12 +197,23 @@ Material:
     - _UvAnimScrollXSpeed: 0
     - _UvAnimScrollY: 0
     - _UvAnimScrollYSpeed: 0
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.76470596, g: 0.86274517, b: 0.9333334, a: 1}
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 0.43642336, g: 0.8301887, b: 0.37201852, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GroundColor: {r: 0.36899996, g: 0.34899998, b: 0.34099993, a: 1}
+    - _HorizonLineColor: {r: 0.9044118, g: 0.8872592, b: 0.7913603, a: 1}
     - _MatcapColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadeColor: {r: 0.38823533, g: 0.6901961, b: 0.7803922, a: 1}
+    - _RimColor: {r: 0.9490197, g: 0.18823531, b: 0.3921569, a: 1}
+    - _ShadeColor: {r: 0.85098046, g: 0.015686275, b: 0.24313727, a: 1}
+    - _SkyGradientBottom: {r: 0.76470596, g: 0.8156863, b: 0.8509805, a: 1}
+    - _SkyGradientTop: {r: 0.17254895, g: 0.5686274, b: 0.6941177, a: 1}
+    - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _SunDiscColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SunHaloColor: {r: 0.8970588, g: 0.7760561, b: 0.666198, a: 1}
   m_BuildTextureStacks: []
