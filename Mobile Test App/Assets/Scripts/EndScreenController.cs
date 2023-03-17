@@ -11,17 +11,35 @@ public class EndScreenController : MonoBehaviour
     [SerializeField]
     private TMP_Text m_ScoreText;
     [SerializeField]
+    private TMP_Text m_PlayerName;
+    [SerializeField]
+    private TMP_Text m_PlayerLevelText;
+    [SerializeField]
     private Slider m_XpBar;
     private float XpToGive;
     private float ScoreAchived;
 
-    private float m_CurrentLevel = 1;
+    public float TotalXP = 0;
+    public float Level = 0;
+    public string Name = "Name";
 
     private void Start()
     {
+        PlayerInfo info = SaveManager.LoadPlayerInfo();
+        if (info != null)
+        {
+            TotalXP = info.TotalXP;
+            Level = info.Level;
+            Name = info.Name;  
+        }
+        else
+        {
+            SaveManager.SavePlayerInfo(this);
+        }
+        m_PlayerName.text = Name;  
         m_ScoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
         m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
-        XpToGive = 204.1f;
+        XpToGive = 450.1f;
     }
 
     private void OnEnable()
@@ -36,16 +54,27 @@ public class EndScreenController : MonoBehaviour
 
     private void Update()
     {
-        if (XpToGive >= m_XpBar.value)
+        m_PlayerLevelText.text = Level.ToString();
+
+        if (XpToGive >= m_XpBar.maxValue)
+        {
+            XpToGive = XpToGive - m_XpBar.maxValue;
+            m_XpBar.value = 0;
+            Level = Level + 1;
+            m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
+          
+        }
+        else if (XpToGive >= 0)
         {
             m_XpBar.value = m_XpBar.value + 50 * Time.deltaTime;
+            XpToGive = XpToGive - 50 * Time.deltaTime;
         }
     }
 
     private void UpdateAccuracy(float Accuracy)
     {
-        ScoreAchived= Accuracy;
-        XpToGive = Convert.ToSingle(CalculateXPToGive());
+        ScoreAchived = Accuracy;
+        //XpToGive = Convert.ToSingle(CalculateXPToGive());
         m_ScoreText.text = "Score: " + Accuracy.ToString();
     }
 
@@ -53,7 +82,7 @@ public class EndScreenController : MonoBehaviour
     {
         double XpToLevel;
 
-        XpToLevel = m_CurrentLevel / 0.07f;
+        XpToLevel = Level / 0.07f;
         XpToLevel = Math.Pow(XpToLevel, 2);
 
         return XpToLevel;
@@ -64,6 +93,10 @@ public class EndScreenController : MonoBehaviour
         double XpOut;
 
         XpOut = ScoreAchived / 10;
+
+        TotalXP = TotalXP + Convert.ToSingle(XpOut);
+        SaveManager.SavePlayerInfo(this);
+
 
         return XpOut;
     }

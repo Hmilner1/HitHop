@@ -16,25 +16,45 @@ public class VolumeSlider : MonoBehaviour
     [SerializeField]
     private Slider m_VolumeSlider;
 
+    public float Master = 1;
+    public float Music = 1;
+    public float Sfx = 1;
+
     private void Awake()
     {
+        AudioSettings settings =  SaveManager.LoadAudioSettings();
+        if (settings != null)
+        {
+            Master = settings.Master;
+            Music = settings.Music;
+            Sfx = settings.Sfx;
+        }
+        else
+        {
+            SaveManager.SaveAudioSettings(this);
+        }
 
     }
 
     private void Update()
     {
+        AudioSettings settings = SaveManager.LoadAudioSettings();
+        Master = settings.Master;
+        Music = settings.Music;
+        Sfx = settings.Sfx;
+
         switch (volumeType)
         {
             case VolumeType.MASTER:
-                m_VolumeSlider.value = AudioManager.instance.m_MasterVolume;
+                m_VolumeSlider.value = Master;
                 break;
 
             case VolumeType.MUSIC:
-                m_VolumeSlider.value = AudioManager.instance.m_Music;
+                m_VolumeSlider.value = Music;
                 break;
 
             case VolumeType.SFX:
-                m_VolumeSlider.value = AudioManager.instance.m_SFX;
+                m_VolumeSlider.value = Sfx;
                 break;
                 default:
                 Debug.LogWarning("Volume error unknown source");
@@ -47,20 +67,24 @@ public class VolumeSlider : MonoBehaviour
         switch (volumeType)
         {
             case VolumeType.MASTER:
-                AudioManager.instance.m_MasterVolume = m_VolumeSlider.value;
+                Master = m_VolumeSlider.value;
+                AudioManager.instance.m_MasterVolume = Master;
                 break;
 
             case VolumeType.MUSIC:
-                AudioManager.instance.m_Music = m_VolumeSlider.value;
+                Music = m_VolumeSlider.value;
+                AudioManager.instance.m_Music = Music;
                 break;
 
             case VolumeType.SFX:
-                AudioManager.instance.m_SFX = m_VolumeSlider.value;
+                Sfx = m_VolumeSlider.value;
+                AudioManager.instance.m_SFX = Sfx;
                 break;
             default:
                 Debug.LogWarning("Volume error unknown source");
                 break;
         }
+        SaveManager.SaveAudioSettings(this);
 
     }
 
