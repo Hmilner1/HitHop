@@ -13,6 +13,13 @@ public class PlayerInputs : MonoBehaviour
     public delegate void EndTouch(Vector2 position);
     public static event EndTouch OnEndTouch;
 
+    public delegate void StartMultiTouch(bool multipress);
+    public static event StartMultiTouch OnStartMulti;
+
+    public delegate void EndMultiTouch(bool multipress);
+    public static event EndMultiTouch OnEndMulti;
+
+
     private void Awake()
     {
         m_PlayerControls = new PlayerControls();
@@ -40,6 +47,7 @@ public class PlayerInputs : MonoBehaviour
         if (OnStartTouch != null)
         {
             OnStartTouch?.Invoke(m_PlayerControls.Press.TouchPosition.ReadValue<Vector2>());
+            
         }
     }
 
@@ -51,4 +59,15 @@ public class PlayerInputs : MonoBehaviour
             OnEndTouch?.Invoke(m_PlayerControls.Press.TouchPosition.ReadValue<Vector2>());
         }
     }
+
+    private void StartMulti(InputAction.CallbackContext context)
+    {
+        OnStartMulti?.Invoke(true);
+    }
+
+    private void EndMulti(InputAction.CallbackContext context)
+    {
+        OnEndMulti?.Invoke(false);
+    }
+
 }

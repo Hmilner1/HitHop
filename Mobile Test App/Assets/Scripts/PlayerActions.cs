@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private float m_LerpAmount;
     private float Accuracy;
+    private bool multiTouch;
 
     public delegate void AddPoint(int Score, int CurrentCombo);
     public static event AddPoint OnAddPoint;
@@ -33,11 +35,16 @@ public class PlayerActions : MonoBehaviour
     public delegate void GetAccuracy(float Accuracy);
     public static event GetAccuracy OnGetAccuracy;
 
+    public delegate void HitBeat();
+    public static event HitBeat OnBeatHit;
+
     private void OnEnable()
     {
         PlayerInputs.OnStartTouch += Move;
         PlayerInputs.OnStartTouch += StartClick;
         PlayerInputs.OnEndTouch += StopClick;
+        PlayerInputs.OnStartMulti += MultiTouch;
+        PlayerInputs.OnEndMulti += MultiTouch;
         BeatSpawn.OnGameEnd += CalculateAccuracy;
         BeatMovement.OnBeatMiss += BeatMissed;
     }
@@ -46,6 +53,8 @@ public class PlayerActions : MonoBehaviour
         PlayerInputs.OnStartTouch -= Move;
         PlayerInputs.OnStartTouch -= StartClick;
         PlayerInputs.OnEndTouch -= StopClick;
+        PlayerInputs.OnStartMulti -= MultiTouch;
+        PlayerInputs.OnEndMulti -= MultiTouch;
         BeatSpawn.OnGameEnd -= CalculateAccuracy;
         BeatMovement.OnBeatMiss -= BeatMissed;
     }
@@ -55,6 +64,7 @@ public class PlayerActions : MonoBehaviour
         BeatDestroyed = false;
         m_Clicked = false;
         m_Jump = false;
+        multiTouch = false;
         m_PlayerInputs = new PlayerInputs();
     }
 
@@ -102,6 +112,18 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    private void MultiTouch(bool multiPress)
+    {
+        if (multiPress == false)
+        {
+            return;
+        }
+        else if (multiPress == true)
+        {
+            SceneManager.LoadScene("LevelEndScreen", LoadSceneMode.Additive);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         GameObject beat;
@@ -141,7 +163,7 @@ public class PlayerActions : MonoBehaviour
                 if (!MissBeat.activeSelf)
                 {
                     Destroy(MissBeat);
-                    BeatMissed();
+                    Combo = 0;
                     OnAddPoint?.Invoke(m_Score, Combo);
                 }
             }
@@ -152,7 +174,7 @@ public class PlayerActions : MonoBehaviour
                 {
                     AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
                     Destroy(MissBeat);
-                    BeatMissed();
+                    Combo = 0;
                     OnAddPoint?.Invoke(m_Score, Combo);
                 }
             }
@@ -165,6 +187,7 @@ public class PlayerActions : MonoBehaviour
         {
             m_Clicked = true;
         }
+
     }
 
 
@@ -195,13 +218,17 @@ public class PlayerActions : MonoBehaviour
                     break;
             }
             OnAddPoint?.Invoke(m_Score,Combo);
+            OnBeatHit?.Invoke();
             BeatDestroyed = false;
         }
     }
 
-    private void BeatMissed()
+    private void BeatMissed(string Type)
     {
-        Combo = 0;
+        if (Type == "Beat")
+        {
+            Combo = 0;
+        }
     }
 
     private void CalculateAccuracy()

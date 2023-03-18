@@ -11,7 +11,8 @@
                     "id": "c96c1aec-5917-43e9-8814-9cec1508a0a0",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ScreenPress",
@@ -19,7 +20,8 @@
                     "id": "d268c07c-f9ea-4e0b-ae6c-493765559a49",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TouchPosition",
@@ -27,14 +29,15 @@
                     "id": "982a450a-d0d1-4339-a578-6051bfc61405",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "fb73ef85-cf96-4f6d-b15f-502691acc92d",
-                    "path": "<Touchscreen>/primaryTouch/press",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -7,7 +7,7 @@ public class BeatMovement : MonoBehaviour
     BeatSpawn beatSpawner;
     private float m_BPM;
 
-    public delegate void BeatMissed();
+    public delegate void BeatMissed(string type);
     public static event BeatMissed OnBeatMiss;
 
     private void Start()
@@ -26,7 +26,11 @@ public class BeatMovement : MonoBehaviour
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
             if (gameObject.tag == "Beat")
             {
-                OnBeatMiss?.Invoke();
+                OnBeatMiss?.Invoke("Beat");
+            }
+            else if (gameObject.tag == "Miss")
+            {
+                OnBeatMiss?.Invoke("Miss");
             }
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject);
