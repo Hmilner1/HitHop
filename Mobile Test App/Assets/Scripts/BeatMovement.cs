@@ -21,7 +21,7 @@ public class BeatMovement : MonoBehaviour
     {
         transform.position -= new Vector3(m_BPM * Time.deltaTime, 0f);
 
-        if (transform.position.x < -4)
+        if (transform.position.x < -2.5)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
             if (gameObject.tag == "Beat")
@@ -40,6 +40,10 @@ public class BeatMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Beat")
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+        if (collision.gameObject.tag == "Miss")
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
         }

@@ -9,9 +9,11 @@ public class BeatSpawn : MonoBehaviour
     private SongSO m_Song;
     public float m_BPM;
     public float m_BeatsNeeded;
-    private AudioSource audioSource;
+
     public GameObject m_Beat;
+    public GameObject m_LaneSwapBeat;
     public GameObject m_DontHitBeat;
+
     public GameObject m_HighSpawn;
     public GameObject m_LowSpawn;
     public float TimerTime;
@@ -26,15 +28,12 @@ public class BeatSpawn : MonoBehaviour
     {
         m_SelectedSong = GameObject.Find("SongManger").GetComponent<SelectedSong>();
         m_Song = m_SelectedSong.m_SongSO;
-        audioSource = GetComponent<AudioSource>();
-        // audioSource.clip = m_Song.Song;
         AudioManager.instance.InitMusic(m_Song.Song);
         m_BPM = m_Song.BPM;
         timer = TimerTime;
         timer = Mathf.FloorToInt(timer % 60);
         m_SongLength = m_Song.Length;
         m_BeatsNeeded = m_BPM* (m_SongLength/60);
-        audioSource.Play();
         m_LoadedEndScreen = false;
     }
 
@@ -73,6 +72,7 @@ public class BeatSpawn : MonoBehaviour
         if (m_BeatsNeeded > 0)
         {
             float spawnAmount = m_BPM / 60;
+
             for (int i = 0; i < spawnAmount; i++)
             {
                 float spawnpoint = Random.Range(1, 6);
@@ -102,6 +102,23 @@ public class BeatSpawn : MonoBehaviour
                     {
 
                         Instantiate(m_DontHitBeat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
+                        m_BeatsNeeded--;
+                    }
+                }
+                else if (spawnpoint == 6)
+                {
+                    float spawnpointDontHit = Random.Range(1, 3);
+
+                    if (spawnpointDontHit == 1)
+                    {
+
+                        Instantiate(m_LaneSwapBeat, new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
+                        m_BeatsNeeded--;
+                    }
+                    else if (spawnpointDontHit == 2)
+                    {
+
+                        Instantiate(m_LaneSwapBeat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
                         m_BeatsNeeded--;
                     }
                 }

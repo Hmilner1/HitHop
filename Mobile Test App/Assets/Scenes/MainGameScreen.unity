@@ -1890,6 +1890,7 @@ MonoBehaviour:
   m_BPM: 168
   m_BeatsNeeded: 0
   m_Beat: {fileID: 2638529346003260798, guid: 82d3975df7d62c0408eefa7cafe4b2f3, type: 3}
+  m_LaneSwapBeat: {fileID: 2638529346003260798, guid: c403d02fad1787442a172d7ec44adf74, type: 3}
   m_DontHitBeat: {fileID: 2638529346003260798, guid: 8a49ca9ba1a85a04d9ca2d6513f1e9c6, type: 3}
   m_HighSpawn: {fileID: 277969914}
   m_LowSpawn: {fileID: 1569933298}

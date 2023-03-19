@@ -152,6 +152,22 @@ public class PlayerActions : MonoBehaviour
             }
         }
 
+        GameObject LaneSwapBeat;
+        if (collision.gameObject.tag == "LaneSwapBeat")
+        {
+            LaneSwapBeat = collision.gameObject;
+            if (m_Jump)
+            {
+                LaneSwapBeatMovement m_SwapScrip = LaneSwapBeat.GetComponent<LaneSwapBeatMovement>();
+                m_SwapScrip.FirstHit();
+            }
+            else if (m_Clicked && !m_Jump)
+            {
+                LaneSwapBeatMovement m_SwapScrip = LaneSwapBeat.GetComponent<LaneSwapBeatMovement>();
+                m_SwapScrip.FirstHit();
+            }
+        }
+
         GameObject MissBeat;
         if (collision.gameObject.tag == "Miss")
         {
@@ -187,7 +203,6 @@ public class PlayerActions : MonoBehaviour
         {
             m_Clicked = true;
         }
-
     }
 
 
