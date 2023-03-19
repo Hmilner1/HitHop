@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2051074550460408374}
   - component: {fileID: 6116084607108938225}
   - component: {fileID: 3635789821616858056}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LaneSwapBeat
   m_TagString: LaneSwapBeat
   m_Icon: {fileID: 0}
@@ -113,9 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef04732c38d76e4ab32461bff6cdf91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HighSpawn: {fileID: 0}
-  m_LowSpawn: {fileID: 0}
   m_LerpAmount: 8.67
+  m_Rigidbody: {fileID: 3635789821616858056}
 --- !u!61 &6116084607108938225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,7 +174,7 @@ GameObject:
   - component: {fileID: 988939727142060828}
   - component: {fileID: 7483515649459381697}
   - component: {fileID: 3692506324036818024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

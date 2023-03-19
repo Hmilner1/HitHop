@@ -9,8 +9,8 @@ public class LaneSwapBeatMovement : MonoBehaviour
         HIGH,
         LOW
     }
-    public GameObject m_HighSpawn;
-    public GameObject m_LowSpawn;
+    private GameObject m_HighSpawn;
+    private GameObject m_LowSpawn;
 
     private Position m_Position;
 
@@ -19,9 +19,17 @@ public class LaneSwapBeatMovement : MonoBehaviour
 
     private int m_Pos;
     private int m_HitNum;
+    private float m_RayCastRange = 10f;
+
 
     public delegate void HitBeat();
     public static event HitBeat OnBeatHit;
+
+    [SerializeField]
+    private Rigidbody2D m_Rigidbody;
+
+    private int layerMask = 1 << 3;
+    private Transform m_Transform;
 
     private void Awake()
     {
@@ -45,7 +53,20 @@ public class LaneSwapBeatMovement : MonoBehaviour
 
     private void Update()
     {
-        
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * m_RayCastRange, Color.yellow);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * m_RayCastRange, Color.yellow);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, m_RayCastRange, layerMask))
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
+            Debug.Log("Did Hit");
+        }
+        else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, m_RayCastRange, layerMask))
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
+            Debug.Log("Did Hit");
+        }
+        m_Transform = transform;
     }
 
     public void FirstHit()
@@ -53,12 +74,12 @@ public class LaneSwapBeatMovement : MonoBehaviour
         m_HitNum++;
         if (m_Position == Position.HIGH)
         {
-            this.transform.position = new Vector2(this.transform.position.x, m_LowSpawn.transform.position.y);
+            transform.position = new Vector2(m_Transform.position.x, m_LowSpawn.transform.position.y);
             AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
         }
         if (m_Position == Position.LOW)
         {
-            this.transform.position = new Vector2(this.transform.position.x, m_HighSpawn.transform.position.y);
+            transform.position = new Vector2(m_Transform.position.x, m_HighSpawn.transform.position.y);
             AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
         }
 

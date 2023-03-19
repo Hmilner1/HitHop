@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5628414995533319614}
   - component: {fileID: 6116084607108938225}
   - component: {fileID: 3635789821616858056}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DontHitBeat
   m_TagString: Miss
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 988939727142060828}
   - component: {fileID: 7483515649459381697}
   - component: {fileID: 3692506324036818024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

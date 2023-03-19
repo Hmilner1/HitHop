@@ -7,11 +7,12 @@ TagManager:
   - Beat
   - Perfect
   - Miss
+  - LaneSwapBeat
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BeatLayer
   - Water
   - UI
   - 

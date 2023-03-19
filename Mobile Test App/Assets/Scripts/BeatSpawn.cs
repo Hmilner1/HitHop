@@ -75,7 +75,7 @@ public class BeatSpawn : MonoBehaviour
 
             for (int i = 0; i < spawnAmount; i++)
             {
-                float spawnpoint = Random.Range(1, 6);
+                float spawnpoint = Random.Range(1, 7);
                 if (spawnpoint == 1 || spawnpoint == 4)
                 {
 
