@@ -35,4 +35,16 @@ public class SceneMan : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
     }
 
+    public void OnClickShop()
+    {
+        AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+        SceneManager.LoadScene("ShopMenu", LoadSceneMode.Additive);
+    }
+
+    public void UnloadShop()
+    {
+        AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+        SceneManager.UnloadSceneAsync("ShopMenu");
+    }
+
 }

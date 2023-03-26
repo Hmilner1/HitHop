@@ -66,6 +66,7 @@ public class LaneSwapBeatMovement : MonoBehaviour
         if (timer < 2f)
         {
             RaycastHit hit;
+            RaycastHit hit2;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * m_RayCastRange, Color.yellow);
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * m_RayCastRange, Color.yellow);
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, m_RayCastRange, layerMask))
@@ -73,7 +74,7 @@ public class LaneSwapBeatMovement : MonoBehaviour
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
                 Debug.Log("Did Hit");
             }
-            else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, m_RayCastRange, layerMask))
+            else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit2, m_RayCastRange, layerMask))
             {
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
                 Debug.Log("Did Hit");

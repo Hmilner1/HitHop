@@ -13,6 +13,7 @@ public class BeatSpawn : MonoBehaviour
     public GameObject m_Beat;
     public GameObject m_LaneSwapBeat;
     public GameObject m_DontHitBeat;
+    public GameObject m_FadeBeat;
 
     [SerializeField]
     private GameObject[] m_BeatList;
@@ -87,11 +88,15 @@ public class BeatSpawn : MonoBehaviour
     private int ChoseBeat()
     {
         float RandomBeatNum = Random.Range(1, 100);
-        if (RandomBeatNum <= 40)
+        if (RandomBeatNum <= 10)
+        {
+            return 3;
+        }
+        else if (RandomBeatNum <= 20)
         {
             return 2;
         }
-        else if (RandomBeatNum <= 10)
+        else if (RandomBeatNum <= 40)
         {
             return 1;
         }

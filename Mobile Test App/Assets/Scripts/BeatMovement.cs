@@ -32,7 +32,14 @@ public class BeatMovement : MonoBehaviour
             {
                 OnBeatMiss?.Invoke("Beat");
             }
-                Destroy(gameObject.GetComponent<BoxCollider2D>());
+            Destroy(gameObject.GetComponent<BoxCollider2D>());
+            Destroy(gameObject);
+        }
+
+        if (transform.position.x > 6.7)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
+            Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject);
         }
     }
