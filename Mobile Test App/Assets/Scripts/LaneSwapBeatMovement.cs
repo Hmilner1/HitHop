@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaneSwapBeatMovement : MonoBehaviour
 {
     private enum Position
-    { 
+    {
         HIGH,
         LOW
     }
@@ -54,10 +54,6 @@ public class LaneSwapBeatMovement : MonoBehaviour
             Debug.Log("Error Getting LaneSwapBeat Position");
         }
         m_HitNum = 0;
-    }
-    private void Start()
-    {
-      
     }
 
     private void Update()
@@ -109,4 +105,12 @@ public class LaneSwapBeatMovement : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Miss")
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+
+    }
 }

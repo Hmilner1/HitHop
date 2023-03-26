@@ -32,6 +32,10 @@ public class BeatMovement : MonoBehaviour
             {
                 OnBeatMiss?.Invoke("Beat");
             }
+            else if (gameObject.tag == "FadeBeat")
+            {
+                OnBeatMiss?.Invoke("Beat");
+            }
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject);
         }

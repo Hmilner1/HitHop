@@ -152,6 +152,32 @@ public class PlayerActions : MonoBehaviour
             }
         }
 
+        GameObject Fadebeat;
+        if (collision.gameObject.tag == "FadeBeat")
+        {
+            Fadebeat = collision.gameObject;
+            if (m_Jump)
+            {
+                AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+                Fadebeat.SetActive(false);
+                if (!Fadebeat.activeSelf)
+                {
+                    Destroy(Fadebeat);
+                    BeatDestroyed = true;
+                }
+            }
+            else if (m_Clicked && !m_Jump)
+            {
+                Fadebeat.SetActive(false);
+                if (!Fadebeat.activeSelf)
+                {
+                    AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+                    Destroy(Fadebeat);
+                    BeatDestroyed = true;
+                }
+            }
+        }
+
         GameObject LaneSwapBeat;
         if (collision.gameObject.tag == "LaneSwapBeat")
         {
