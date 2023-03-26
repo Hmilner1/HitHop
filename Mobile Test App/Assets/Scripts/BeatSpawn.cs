@@ -14,6 +14,9 @@ public class BeatSpawn : MonoBehaviour
     public GameObject m_LaneSwapBeat;
     public GameObject m_DontHitBeat;
 
+    [SerializeField]
+    private GameObject[] m_BeatList;
+
     public GameObject m_HighSpawn;
     public GameObject m_LowSpawn;
     public float TimerTime;
@@ -75,54 +78,41 @@ public class BeatSpawn : MonoBehaviour
 
             for (int i = 0; i < spawnAmount; i++)
             {
-                float spawnpoint = Random.Range(1, 7);
-                if (spawnpoint == 1 || spawnpoint == 4)
-                {
-
-                    Instantiate(m_Beat, new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
-                    m_BeatsNeeded--;
-                }
-                else if (spawnpoint == 2 || spawnpoint == 5)
-                {
-
-                    Instantiate(m_Beat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
-                    m_BeatsNeeded--;
-                }
-                else if (spawnpoint == 3)
-                {
-                    float spawnpointDontHit = Random.Range(1, 3);
-
-                    if (spawnpointDontHit == 1)
-                    {
-
-                        Instantiate(m_DontHitBeat, new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
-                        m_BeatsNeeded--;
-                    }
-                    else if (spawnpointDontHit == 2)
-                    {
-
-                        Instantiate(m_DontHitBeat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
-                        m_BeatsNeeded--;
-                    }
-                }
-                else if (spawnpoint == 6)
-                {
-                    float spawnpointDontHit = Random.Range(1, 3);
-
-                    if (spawnpointDontHit == 1)
-                    {
-
-                        Instantiate(m_LaneSwapBeat, new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z), Quaternion.identity);
-                        m_BeatsNeeded--;
-                    }
-                    else if (spawnpointDontHit == 2)
-                    {
-
-                        Instantiate(m_LaneSwapBeat, new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z), Quaternion.identity);
-                        m_BeatsNeeded--;
-                    }
-                }
+                Instantiate(m_BeatList[ChoseBeat()], ChoseSpawnPos(), Quaternion.identity);
+                m_BeatsNeeded--;
             }
         }
+    }
+
+    private int ChoseBeat()
+    {
+        float RandomBeatNum = Random.Range(1, 100);
+        if (RandomBeatNum <= 40)
+        {
+            return 2;
+        }
+        else if (RandomBeatNum <= 10)
+        {
+            return 1;
+        }
+        else if (RandomBeatNum <= 100)
+        {
+            return 0;
+        }
+        return 0;
+    }
+
+    private Vector3 ChoseSpawnPos()
+    {
+        float RandomBeatSpawn = Random.Range(1, 100);
+        if (RandomBeatSpawn <= 50)
+        {
+            return new Vector3(m_LowSpawn.transform.position.x, m_LowSpawn.transform.position.y, m_LowSpawn.transform.position.z);
+        }
+        else if (RandomBeatSpawn <= 100)
+        {
+           return new Vector3(m_HighSpawn.transform.position.x, m_HighSpawn.transform.position.y, m_HighSpawn.transform.position.z);
+        }
+        return new Vector3(0,0,0);
     }
 }

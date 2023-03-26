@@ -31,6 +31,11 @@ public class LaneSwapBeatMovement : MonoBehaviour
     private int layerMask = 1 << 3;
     private Transform m_Transform;
 
+    [SerializeField]
+    private GameObject m_TestObject;
+
+    private float timer = 0;
+
     private void Awake()
     {
         m_HighSpawn = GameObject.Find("HighSpawnPos");
@@ -50,23 +55,31 @@ public class LaneSwapBeatMovement : MonoBehaviour
         }
         m_HitNum = 0;
     }
+    private void Start()
+    {
+      
+    }
 
     private void Update()
     {
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * m_RayCastRange, Color.yellow);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * m_RayCastRange, Color.yellow);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, m_RayCastRange, layerMask))
+        timer = timer + 1f * Time.deltaTime;
+        if (timer < 2f)
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
-            Debug.Log("Did Hit");
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * m_RayCastRange, Color.yellow);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * m_RayCastRange, Color.yellow);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, m_RayCastRange, layerMask))
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
+                Debug.Log("Did Hit");
+            }
+            else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, m_RayCastRange, layerMask))
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
+                Debug.Log("Did Hit");
+            }
         }
-        else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, m_RayCastRange, layerMask))
-        {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
-            Debug.Log("Did Hit");
-        }
-        m_Transform = transform;
+        m_Transform = m_TestObject.transform;
     }
 
     public void FirstHit()
@@ -74,12 +87,12 @@ public class LaneSwapBeatMovement : MonoBehaviour
         m_HitNum++;
         if (m_Position == Position.HIGH)
         {
-            transform.position = new Vector2(m_Transform.position.x, m_LowSpawn.transform.position.y);
+            m_Transform.position = new Vector3(m_Transform.position.x, m_LowSpawn.transform.position.y, 0);
             AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
         }
         if (m_Position == Position.LOW)
         {
-            transform.position = new Vector2(m_Transform.position.x, m_HighSpawn.transform.position.y);
+            m_Transform.position = new Vector3(m_Transform.position.x, m_HighSpawn.transform.position.y, 0);
             AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
         }
 

@@ -28,31 +28,20 @@ public class BeatMovement : MonoBehaviour
             {
                 OnBeatMiss?.Invoke("Beat");
             }
-            else if (gameObject.tag == "Miss")
+            else if (gameObject.tag == "LaneSwapBeat")
             {
-                OnBeatMiss?.Invoke("Miss");
+                OnBeatMiss?.Invoke("Beat");
             }
-            Destroy(gameObject.GetComponent<BoxCollider2D>());
+                Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.tag != "LaneSwapBeat")
+        if (collision.gameObject.tag == "Beat")
         {
-            if (collision.gameObject.tag == "Beat")
-            {
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
-            }
-            else if (collision.gameObject.tag == "Miss")
-            {
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
-            }
-            else if (collision.gameObject.tag == "LaneSwapBeat")
-            {
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
-            }
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, gameObject.transform.position.z);
         }
     }
 }

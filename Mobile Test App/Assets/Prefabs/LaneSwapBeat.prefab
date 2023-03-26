@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LerpAmount: 8.67
   m_Rigidbody: {fileID: 3635789821616858056}
+  m_TestObject: {fileID: 2638529346003260798}
 --- !u!61 &6116084607108938225
 BoxCollider2D:
   m_ObjectHideFlags: 0
