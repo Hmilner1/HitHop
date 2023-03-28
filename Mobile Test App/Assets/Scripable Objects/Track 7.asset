@@ -22,3 +22,4 @@ MonoBehaviour:
     Path: event:/Music/Track7
   BPM: 103
   Length: 114
+  BeatSpawnChance: 0a000000140000002800000064000000

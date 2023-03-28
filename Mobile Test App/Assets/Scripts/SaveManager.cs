@@ -69,4 +69,37 @@ public static class SaveManager
             return null;
         }
     }
+
+
+    public static void SavePlayerSkin(ShopPurcahseButton NewPlayerSkin)
+    {
+        BinaryFormatter PlayerFormatter = new BinaryFormatter();
+        string PlayerPath = Application.persistentDataPath + "/PlayerSkin.data";
+        FileStream fileStream = new FileStream(PlayerPath, FileMode.Create);
+
+        PlayerSkin settings = new PlayerSkin(NewPlayerSkin);
+
+
+        PlayerFormatter.Serialize(fileStream, settings);
+        fileStream.Close();
+    }
+
+    public static PlayerSkin LoadPlayerSkin()
+    {
+        string PlayerPath = Application.persistentDataPath + "/PlayerSkin.data";
+        if (File.Exists(PlayerPath))
+        {
+            BinaryFormatter PlayerFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(PlayerPath, FileMode.Open);
+
+            PlayerSkin Settings = PlayerFormatter.Deserialize(fileStream) as PlayerSkin;
+            fileStream.Close();
+            return Settings;
+        }
+        else
+        {
+            Debug.Log("Audio save not found");
+            return null;
+        }
+    }
 }

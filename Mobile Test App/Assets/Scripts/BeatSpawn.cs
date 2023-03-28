@@ -88,19 +88,19 @@ public class BeatSpawn : MonoBehaviour
     private int ChoseBeat()
     {
         float RandomBeatNum = Random.Range(1, 100);
-        if (RandomBeatNum <= 10)
+        if (RandomBeatNum <= m_Song.BeatSpawnChance[0])
         {
             return 3;
         }
-        else if (RandomBeatNum <= 20)
+        else if (RandomBeatNum <= m_Song.BeatSpawnChance[1])
         {
             return 2;
         }
-        else if (RandomBeatNum <= 40)
+        else if (RandomBeatNum <= m_Song.BeatSpawnChance[2])
         {
             return 1;
         }
-        else if (RandomBeatNum <= 100)
+        else if (RandomBeatNum <= m_Song.BeatSpawnChance[3])
         {
             return 0;
         }

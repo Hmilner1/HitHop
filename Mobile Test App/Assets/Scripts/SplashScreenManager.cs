@@ -10,7 +10,12 @@ public class SplashScreenManager : MonoBehaviour
     [SerializeField]
     private GameObject m_SongManager;
     //[SerializeField]
-   // private GameObject m_SaveManager;
+    // private GameObject m_SaveManager;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 120;
+    }
     public void OnClickStart()
     {
         SceneManager.LoadScene("StartMenu");

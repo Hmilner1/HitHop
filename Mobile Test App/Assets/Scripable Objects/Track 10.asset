@@ -20,5 +20,6 @@ MonoBehaviour:
       Data3: -2118506343
       Data4: 177109165
     Path: event:/Music/Track6
-  BPM: 234
+  BPM: 117
   Length: 140
+  BeatSpawnChance: 0a000000140000002800000064000000

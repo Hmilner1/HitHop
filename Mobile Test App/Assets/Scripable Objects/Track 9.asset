@@ -22,3 +22,4 @@ MonoBehaviour:
     Path: event:/SFX/BeatHit
   BPM: 0
   Length: 0
+  BeatSpawnChance: 00000000000000000000000000000000

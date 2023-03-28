@@ -19,9 +19,11 @@ public class EndScreenController : MonoBehaviour
     private float XpToGive;
     private float ScoreAchived;
 
+    //Player Save Data
     public float TotalXP = 0;
     public float Level = 0;
     public string Name = "Name";
+    public GameObject Skin;
 
     private void Start()
     {

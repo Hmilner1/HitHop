@@ -16,6 +16,7 @@ public class SongSO : ScriptableObject
     [Header("Song Length")]
     public float Length;
 
-
+    [Header("Spawn % 0= Fade, 1= LaneSwap, 2= Dont Hit, 3= Beat")]
+    public int[] BeatSpawnChance;
     
 }

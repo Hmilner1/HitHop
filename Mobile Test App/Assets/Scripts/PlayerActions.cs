@@ -38,6 +38,9 @@ public class PlayerActions : MonoBehaviour
     public delegate void HitBeat();
     public static event HitBeat OnBeatHit;
 
+    [SerializeField]
+    private GameObject[] PlayerSkins;
+
     private void OnEnable()
     {
         PlayerInputs.OnStartTouch += Move;
@@ -66,6 +69,23 @@ public class PlayerActions : MonoBehaviour
         m_Jump = false;
         multiTouch = false;
         m_PlayerInputs = new PlayerInputs();
+
+        PlayerSkin info = SaveManager.LoadPlayerSkin();
+        if (info.CurrentSkin != null)
+        {
+            for(int i = 0; i < PlayerSkins.Length; i++)
+            {
+
+                if ( i == info.CurrentSkin)
+                {
+                    PlayerSkins[i].SetActive(true);
+                }
+                else
+                {
+                    Destroy(PlayerSkins[i]);
+                }
+            }
+        }
     }
 
     private void Start()
