@@ -480,6 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SongList:
+  - {fileID: 11400000, guid: c9257757c6f66be42a80905b25308212, type: 2}
   - {fileID: 11400000, guid: 29126e31807cb6c42a9e0918f850a630, type: 2}
   - {fileID: 11400000, guid: 6acb57236bffda646abcf340bdad772e, type: 2}
   - {fileID: 11400000, guid: 320fae75b54229d44911ddc54a586442, type: 2}

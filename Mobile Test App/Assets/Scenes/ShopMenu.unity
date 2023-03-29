@@ -3160,7 +3160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentSkin: 0
-  SkinToBuy: 0
+  SkinToBuy: 3
 --- !u!114 &453410188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6292,7 +6292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a8ad5a729c0b9a4daf8382b719c496e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da2218fbe2eaff445a3f3c7d172a8cf7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13038,7 +13038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2704e98bfa685034998177b0cf0b3a05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00e499a7756687a4e931f87775413861, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

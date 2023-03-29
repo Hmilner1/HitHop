@@ -18,7 +18,7 @@ public class LaneSwapBeatMovement : MonoBehaviour
     private float m_LerpAmount;
 
     private int m_Pos;
-    private int m_HitNum;
+    public int m_HitNum;
     private float m_RayCastRange = 10f;
 
 
@@ -102,7 +102,7 @@ public class LaneSwapBeatMovement : MonoBehaviour
     private void SecondHit()
     {
         AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
-        Destroy(gameObject);
+       // Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

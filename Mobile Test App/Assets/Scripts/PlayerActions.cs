@@ -71,8 +71,8 @@ public class PlayerActions : MonoBehaviour
         m_PlayerInputs = new PlayerInputs();
 
         PlayerSkin info = SaveManager.LoadPlayerSkin();
-        if (info.CurrentSkin != null)
-        {
+       // if (info.CurrentSkin != null)
+       // {
             for(int i = 0; i < PlayerSkins.Length; i++)
             {
 
@@ -85,7 +85,7 @@ public class PlayerActions : MonoBehaviour
                     Destroy(PlayerSkins[i]);
                 }
             }
-        }
+        //}
     }
 
     private void Start()
@@ -201,16 +201,28 @@ public class PlayerActions : MonoBehaviour
         GameObject LaneSwapBeat;
         if (collision.gameObject.tag == "LaneSwapBeat")
         {
+            LaneSwapBeatMovement SwapScript;
             LaneSwapBeat = collision.gameObject;
+            SwapScript = LaneSwapBeat.GetComponent<LaneSwapBeatMovement>();
             if (m_Jump)
             {
                 LaneSwapBeatMovement m_SwapScrip = LaneSwapBeat.GetComponent<LaneSwapBeatMovement>();
                 m_SwapScrip.FirstHit();
+                if (SwapScript.m_HitNum == 2)
+                {
+                    Destroy(LaneSwapBeat);
+                    BeatDestroyed = true;
+                }
             }
             else if (m_Clicked && !m_Jump)
             {
                 LaneSwapBeatMovement m_SwapScrip = LaneSwapBeat.GetComponent<LaneSwapBeatMovement>();
                 m_SwapScrip.FirstHit();
+                if (SwapScript.m_HitNum == 2)
+                {
+                    Destroy(LaneSwapBeat);
+                    BeatDestroyed = true;
+                }
             }
         }
 
@@ -278,9 +290,11 @@ public class PlayerActions : MonoBehaviour
                     m_Score = m_Score + 20;
                     break;
             }
-            OnAddPoint?.Invoke(m_Score,Combo);
+
+            OnAddPoint?.Invoke(m_Score, Combo);
             OnBeatHit?.Invoke();
             BeatDestroyed = false;
+
         }
     }
 

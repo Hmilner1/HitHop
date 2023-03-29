@@ -47,7 +47,14 @@ public class Song : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(m_WaitTime);
-            SceneManager.LoadScene("MainGameScreen");
+            if (m_SongName.text == "Tutorial")
+            {
+                SceneManager.LoadScene("TutorialLevel");
+            }
+            else
+            {
+                SceneManager.LoadScene("MainGameScreen");
+            }
             StopAllCoroutines();
         }
     }

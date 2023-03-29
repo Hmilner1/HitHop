@@ -53,10 +53,13 @@ public class BeatSpawn : MonoBehaviour
 
         if (m_BeatsNeeded <= 0)
         {
-            if (m_LoadedEndScreen == false)
-            {
-                StartCoroutine(EndGame());
-            }
+           // if (SceneManager.GetActiveScene().name != "Tutorial")
+            //{
+                if (m_LoadedEndScreen == false)
+                {
+                    StartCoroutine(EndGame());
+                }
+            //}
 
         }
     }
