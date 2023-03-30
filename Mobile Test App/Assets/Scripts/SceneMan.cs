@@ -47,4 +47,15 @@ public class SceneMan : MonoBehaviour
         SceneManager.UnloadSceneAsync("ShopMenu");
     }
 
+    public void OnClickSkinMenu()
+    {
+        AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+        SceneManager.LoadScene("SkinMenu", LoadSceneMode.Additive);
+    }
+
+    public void UnloadSkinMenu()
+    {
+        AudioManager.instance.PlayOneShot(FmodEvents.instance.beatDestroySound, this.transform.position);
+        SceneManager.UnloadSceneAsync("SkinMenu");
+    }
 }
