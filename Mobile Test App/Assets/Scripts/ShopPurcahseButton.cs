@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShopPurcahseButton : MonoBehaviour
 {
+    public List<int> AllUnlockedSkins;
     public int CurrentSkin;
     [SerializeField]
     private int SkinToBuy;
@@ -23,7 +24,7 @@ public class ShopPurcahseButton : MonoBehaviour
 
     public void OnClickBuy()
     {
-        CurrentSkin = SkinToBuy;
+        AllUnlockedSkins.Add(SkinToBuy);
         SaveManager.SavePlayerSkin(this);
     }
 }

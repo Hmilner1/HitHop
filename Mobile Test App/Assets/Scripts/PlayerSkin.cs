@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerSkin
 {
     public int CurrentSkin;
+    public List<int> AllOwnedSkins;
 
     public PlayerSkin(ShopPurcahseButton NewPlayerSkin)
     {
         CurrentSkin = NewPlayerSkin.CurrentSkin;
+        AllOwnedSkins = NewPlayerSkin.AllUnlockedSkins;
     }
 
 }
