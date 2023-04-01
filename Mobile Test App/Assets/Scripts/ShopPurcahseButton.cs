@@ -9,6 +9,16 @@ public class ShopPurcahseButton : MonoBehaviour
     [SerializeField]
     private int SkinToBuy;
 
+    private void OnEnable()
+    {
+        EquipSkin.OnSetSkin += SetActiveSkin;
+    }
+
+    private void OnDisable()
+    {
+        EquipSkin.OnSetSkin -= SetActiveSkin;
+    }
+
     private void Awake()
     {
         PlayerSkin info = SaveManager.LoadPlayerSkin();
@@ -24,7 +34,17 @@ public class ShopPurcahseButton : MonoBehaviour
 
     public void OnClickBuy()
     {
+        PlayerSkin info = SaveManager.LoadPlayerSkin();
+        AllUnlockedSkins = info.AllOwnedSkins;
         AllUnlockedSkins.Add(SkinToBuy);
+        SaveManager.SavePlayerSkin(this);
+    }
+
+    public void SetActiveSkin(int Skin)
+    {
+        PlayerSkin info = SaveManager.LoadPlayerSkin();
+        AllUnlockedSkins = info.AllOwnedSkins;
+        CurrentSkin = Skin;
         SaveManager.SavePlayerSkin(this);
     }
 }

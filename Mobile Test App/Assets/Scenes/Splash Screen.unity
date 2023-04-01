@@ -528,6 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9008772b04c0c184ebb33ae8488b4ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllUnlockedSkins: 
   CurrentSkin: 0
   SkinToBuy: 0
 --- !u!4 &884256699
