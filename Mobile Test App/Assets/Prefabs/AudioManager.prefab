@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 2185706270332944794}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2185706270027713132
 MonoBehaviour:
@@ -93,6 +93,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <beatDestroySound>k__BackingField:
+    Guid:
+      Data1: -568866630
+      Data2: 1242889586
+      Data3: -1450428273
+      Data4: -2107846070
+    Path: event:/SFX/RandomBeatHit
+  <MenuSound>k__BackingField:
     Guid:
       Data1: -1399098191
       Data2: 1239618068

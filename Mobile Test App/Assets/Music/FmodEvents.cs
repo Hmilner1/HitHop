@@ -7,6 +7,7 @@ public class FmodEvents : MonoBehaviour
 {
     [field: Header("Beat Sfx")]
     [field: SerializeField] public EventReference beatDestroySound { get; private set; }
+    [field: SerializeField] public EventReference MenuSound { get; private set; }
 
     [field: Header("Music")]
     [field: SerializeField] public EventReference Track7 { get; private set; }

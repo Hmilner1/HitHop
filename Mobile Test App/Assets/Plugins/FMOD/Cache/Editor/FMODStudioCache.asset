@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638141214221813009
+  lastModified: 638160182631352212
   FileSizes:
   - Name: Desktop
-    Value: 1016
+    Value: 1072
   Exists: 1
 --- !u!114 &-4824539045657249576
 MonoBehaviour:
@@ -35,7 +35,7 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638141214221792540
+  lastModified: 638160182631332043
   FileSizes:
   - Name: Desktop
     Value: 1340
@@ -55,10 +55,10 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638141214222195952
+  lastModified: 638160182631522252
   FileSizes:
   - Name: Desktop
-    Value: 2784
+    Value: 13600
   Exists: 1
 --- !u!114 &-2735229341446869104
 MonoBehaviour:
@@ -78,6 +78,33 @@ MonoBehaviour:
     Data2: 1239618068
     Data3: -1978172261
     Data4: 1743345752
+  Banks:
+  - {fileID: -3117572991175082884}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2206746826121089614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RandomBeatHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RandomBeatHit
+  Guid:
+    Data1: -568866630
+    Data2: 1242889586
+    Data3: -1450428273
+    Data4: -2107846070
   Banks:
   - {fileID: -3117572991175082884}
   IsStream: 0
@@ -108,12 +135,13 @@ MonoBehaviour:
   - {fileID: 1630895344653129378}
   - {fileID: -2735229341446869104}
   - {fileID: 4117825312856048615}
+  - {fileID: -2206746826121089614}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4824539045657249576}
   StringsBanks:
   - {fileID: -6110840199322994783}
-  cacheTime: 638141214222195952
+  cacheTime: 638160182631522252
   cacheVersion: 131601
 --- !u!114 &1630895344653129378
 MonoBehaviour:
@@ -157,7 +185,7 @@ MonoBehaviour:
   Path: ../AudioSystemFmod/Build/Desktop/LevelSongs.bank
   Name: LevelSongs
   StudioPath: bank:/LevelSongs
-  lastModified: 638141214221641828
+  lastModified: 638160182631311969
   FileSizes:
   - Name: Desktop
     Value: 3202528
