@@ -14,7 +14,19 @@ public class SplashScreenManager : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 120;
+        //Debug.Log(Application.persistentDataPath);
+        AudioSettings settings = SaveManager.LoadAudioSettings();
+        if (settings != null)
+        {
+            if (settings.BToggleState == false)
+            {
+                Application.targetFrameRate = 120;
+            }
+            else if (settings.BToggleState == true)
+            {
+                Application.targetFrameRate = 30;
+            }
+        }
     }
     public void OnClickStart()
     {

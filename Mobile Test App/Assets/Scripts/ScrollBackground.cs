@@ -13,6 +13,17 @@ public class ScrollBackground : MonoBehaviour
     [SerializeField]
     private float m_speed = -3;
 
+    private void Awake()
+    {
+        AudioSettings info = SaveManager.LoadAudioSettings();
+        if (info.MToggleState == true)
+        {
+            Debug.Log("Background Gone");
+            GameObject Background = GameObject.Find("Backgrounds");
+            Background.SetActive(false);
+        }
+    }
+
     private void Start()
     {
         m_Background1 = GetComponent<BoxCollider2D>();

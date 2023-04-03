@@ -20,6 +20,21 @@ public class VolumeSlider : MonoBehaviour
     public float Music = 1;
     public float Sfx = 1;
 
+    public bool m_BatteryToggleState;
+    public bool m_MotionToggleState;
+
+    private void OnEnable()
+    {
+        SettingsContol.OnBatteryToggle += OnBatteryToggle;
+        SettingsContol.OnMotionToggle += OnMotionToggle;
+    }
+
+    private void OnDisable()
+    {
+        SettingsContol.OnBatteryToggle -= OnBatteryToggle;
+        SettingsContol.OnMotionToggle -= OnMotionToggle;
+    }
+
     private void Awake()
     {
         AudioSettings settings =  SaveManager.LoadAudioSettings();
@@ -28,6 +43,8 @@ public class VolumeSlider : MonoBehaviour
             Master = settings.Master;
             Music = settings.Music;
             Sfx = settings.Sfx;
+            m_BatteryToggleState = settings.BToggleState;
+            m_MotionToggleState = settings.MToggleState;
         }
         else
         {
@@ -85,7 +102,32 @@ public class VolumeSlider : MonoBehaviour
                 break;
         }
         SaveManager.SaveAudioSettings(this);
+    }
 
+    public void OnBatteryToggle(bool isOn)
+    {
+        if (isOn == true)
+        {
+            m_BatteryToggleState = true;
+        }
+        else if (isOn == false)
+        {
+            m_BatteryToggleState = false;
+        }
+        SaveManager.SaveAudioSettings(this);
+    }
+
+    public void OnMotionToggle(bool isOn)
+    {
+        if (isOn == true)
+        {
+            m_MotionToggleState = true;
+        }
+        else if (isOn == false)
+        {
+            m_MotionToggleState = false;
+        }
+        SaveManager.SaveAudioSettings(this);
     }
 
 }

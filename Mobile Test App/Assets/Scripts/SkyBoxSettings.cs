@@ -6,15 +6,27 @@ public class SkyBoxSettings : MonoBehaviour
 {
     [SerializeField]
     private float speed;
+    private bool start;
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioSettings info = SaveManager.LoadAudioSettings();
+        if (info.MToggleState == false)
+        {
+            start = true;
+        }
+        else
+        { 
+            start= false; 
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * speed);
+        if (start == true)
+        {
+            RenderSettings.skybox.SetFloat("_Rotation", Time.time * speed);
+        }
     }
 }

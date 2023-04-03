@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Android.Types;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class EquipableSkins : MonoBehaviour
 {

@@ -16,14 +16,16 @@ public class EndScreenController : MonoBehaviour
     private TMP_Text m_PlayerLevelText;
     [SerializeField]
     private Slider m_XpBar;
-    private float XpToGive;
+    //private float XpToGive;
     private float ScoreAchived;
 
     //Player Save Data
     public float TotalXP = 0;
-    public float Level = 0;
+    public float Level = 1;
     public string Name = "Name";
-    public GameObject Skin;
+    //public GameObject Skin;
+
+    private float TempXp;
 
     private void Start()
     {
@@ -41,7 +43,10 @@ public class EndScreenController : MonoBehaviour
         m_PlayerName.text = Name;  
         m_ScoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
         m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
-        XpToGive = 450.1f;
+        TotalXP = TotalXP + Convert.ToSingle(CalculateXP());
+        TempXp = TotalXP;
+        SaveManager.SavePlayerInfo(this);
+        //XpToGive = 450.1f;
     }
 
     private void OnEnable()
@@ -58,18 +63,32 @@ public class EndScreenController : MonoBehaviour
     {
         m_PlayerLevelText.text = Level.ToString();
 
-        if (XpToGive >= m_XpBar.maxValue)
+        //if (XpToGive >= m_XpBar.maxValue)
+        //{
+        //    XpToGive = XpToGive - m_XpBar.maxValue;
+        //    m_XpBar.value = 0;
+        //    Level = Level + 1;
+        //    m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
+
+        //}
+        //else if (XpToGive >= 0)
+        //{
+        //    m_XpBar.value = m_XpBar.value + 50 * Time.deltaTime;
+        //    XpToGive = XpToGive - 50 * Time.deltaTime;
+        //}
+
+        if (TempXp >= CalculateXP())
         {
-            XpToGive = XpToGive - m_XpBar.maxValue;
-            m_XpBar.value = 0;
+            TempXp = TempXp - Convert.ToSingle(CalculateXP());
             Level = Level + 1;
-            m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
-          
+            SaveManager.SavePlayerInfo(this);
         }
-        else if (XpToGive >= 0)
+        else if (TempXp <= CalculateXP())
         {
-            m_XpBar.value = m_XpBar.value + 50 * Time.deltaTime;
-            XpToGive = XpToGive - 50 * Time.deltaTime;
+            if (m_XpBar.value < TempXp)
+            {
+                m_XpBar.value = m_XpBar.value + 50 * Time.deltaTime;
+            }
         }
     }
 
@@ -97,7 +116,7 @@ public class EndScreenController : MonoBehaviour
         XpOut = ScoreAchived / 10;
 
         TotalXP = TotalXP + Convert.ToSingle(XpOut);
-        SaveManager.SavePlayerInfo(this);
+        //SaveManager.SavePlayerInfo(this);
 
 
         return XpOut;
