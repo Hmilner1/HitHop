@@ -18,7 +18,6 @@ public class ScrollBackground : MonoBehaviour
         AudioSettings info = SaveManager.LoadAudioSettings();
         if (info.MToggleState == true)
         {
-            Debug.Log("Background Gone");
             GameObject Background = GameObject.Find("Backgrounds");
             Background.SetActive(false);
         }

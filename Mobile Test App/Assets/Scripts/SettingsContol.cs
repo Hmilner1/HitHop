@@ -28,9 +28,6 @@ public class SettingsContol : MonoBehaviour
             m_BatteryToggle.isOn = settings.BToggleState;
             m_ReducemotionToggle.isOn = settings.MToggleState; 
         }
-       
-        //Debug.Log(settings.BToggleState.ToString() + " " + m_BatteryToggle.isOn.ToString());
-        Debug.Log(settings.MToggleState.ToString() + " " + m_ReducemotionToggle.isOn.ToString());
 
         m_HomeButton = GameObject.Find("Home Button").GetComponent<Button>();
         m_HomeButton.gameObject.SetActive(false);
@@ -39,6 +36,10 @@ public class SettingsContol : MonoBehaviour
         foreach (Scene scene in scenes)
         {
             if (scene.name == "MainGameScreen")
+            {
+                m_HomeButton.gameObject.SetActive(true);
+            }
+            else if (scene.name == "TutorialLevel")
             {
                 m_HomeButton.gameObject.SetActive(true);
             }

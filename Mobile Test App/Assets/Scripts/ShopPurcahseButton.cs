@@ -8,15 +8,22 @@ public class ShopPurcahseButton : MonoBehaviour
     public int CurrentSkin;
     [SerializeField]
     private int SkinToBuy;
+    [SerializeField]
+    private int ItemCost;
+
+    public delegate void ItemPurchased(int CostAmount, int SkinNum);
+    public static event ItemPurchased OnItemPurchased;
 
     private void OnEnable()
     {
         EquipSkin.OnSetSkin += SetActiveSkin;
+        CurrencyManager.OnCurrencyCheck += CompletePurchase;
     }
 
     private void OnDisable()
     {
         EquipSkin.OnSetSkin -= SetActiveSkin;
+        CurrencyManager.OnCurrencyCheck -= CompletePurchase;
     }
 
     private void Awake()
@@ -34,9 +41,14 @@ public class ShopPurcahseButton : MonoBehaviour
 
     public void OnClickBuy()
     {
+        OnItemPurchased?.Invoke(ItemCost, SkinToBuy);
+    }
+
+    public void CompletePurchase(int SkinNum)
+    {
         PlayerSkin info = SaveManager.LoadPlayerSkin();
         AllUnlockedSkins = info.AllOwnedSkins;
-        AllUnlockedSkins.Add(SkinToBuy);
+        AllUnlockedSkins.Add(SkinNum);
         SaveManager.SavePlayerSkin(this);
     }
 

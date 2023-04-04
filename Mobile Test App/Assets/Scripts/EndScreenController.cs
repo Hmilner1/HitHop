@@ -70,7 +70,8 @@ public class EndScreenController : MonoBehaviour
             if (m_XpBar.value <= TempXp)
             {
                 m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
-                m_XpBar.value = m_XpBar.value + 50 * Time.deltaTime;
+                //m_XpBar.value = m_XpBar.value + 100 * Time.deltaTime;
+                m_XpBar.value = Mathf.Lerp(m_XpBar.value, TempXp, Time.deltaTime*1);
             }
         }
     }

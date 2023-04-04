@@ -102,4 +102,37 @@ public static class SaveManager
             return null;
         }
     }
+
+
+    public static void SaveToken(CurrencyManager TokenMan)
+    {
+        BinaryFormatter PlayerFormatter = new BinaryFormatter();
+        string PlayerPath = Application.persistentDataPath + "/Token.data";
+        FileStream fileStream = new FileStream(PlayerPath, FileMode.Create);
+
+        TokenSave settings = new TokenSave(TokenMan);
+
+
+        PlayerFormatter.Serialize(fileStream, settings);
+        fileStream.Close();
+    }
+
+    public static TokenSave LoadToken()
+    {
+        string PlayerPath = Application.persistentDataPath + "/Token.data";
+        if (File.Exists(PlayerPath))
+        {
+            BinaryFormatter PlayerFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(PlayerPath, FileMode.Open);
+
+            TokenSave Settings = PlayerFormatter.Deserialize(fileStream) as TokenSave;
+            fileStream.Close();
+            return Settings;
+        }
+        else
+        {
+            Debug.Log("Audio save not found");
+            return null;
+        }
+    }
 }
