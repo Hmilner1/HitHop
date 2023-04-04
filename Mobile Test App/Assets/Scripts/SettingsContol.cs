@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 public class SettingsContol : MonoBehaviour
 {
     private Button m_HomeButton;
+    private Button m_RestartButton;
     [SerializeField]
     private Toggle m_BatteryToggle;
     [SerializeField]
@@ -32,16 +33,21 @@ public class SettingsContol : MonoBehaviour
         m_HomeButton = GameObject.Find("Home Button").GetComponent<Button>();
         m_HomeButton.gameObject.SetActive(false);
 
+        m_RestartButton = GameObject.Find("Restart Button").GetComponent<Button>();
+        m_RestartButton.gameObject.SetActive(false);
+
         Scene[] scenes = SceneManager.GetAllScenes();
         foreach (Scene scene in scenes)
         {
             if (scene.name == "MainGameScreen")
             {
                 m_HomeButton.gameObject.SetActive(true);
+                m_RestartButton.gameObject.SetActive(true);
             }
             else if (scene.name == "TutorialLevel")
             {
                 m_HomeButton.gameObject.SetActive(true);
+                m_RestartButton.gameObject.SetActive(true);
             }
         }
     }
