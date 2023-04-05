@@ -485,6 +485,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6acb57236bffda646abcf340bdad772e, type: 2}
   - {fileID: 11400000, guid: 320fae75b54229d44911ddc54a586442, type: 2}
   - {fileID: 11400000, guid: 779baa4d192ef8e46ae0ba473ad60ed1, type: 2}
+  - {fileID: 11400000, guid: 32af9a254e2d9fe42872971f9da9c51d, type: 2}
+  - {fileID: 11400000, guid: 1a65eec09f6c23241a54cd5a3f51232f, type: 2}
+  - {fileID: 11400000, guid: 1592ab2311215814e97b1b1e9dd784b1, type: 2}
   m_SongName: {fileID: 1121757107}
   m_WaitTime: 0.5
 --- !u!1 &578621520

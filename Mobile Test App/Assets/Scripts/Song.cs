@@ -61,10 +61,22 @@ public class Song : MonoBehaviour
 
     public void OnClickForward()
     {
-        if (m_SelectedIndex < m_SongList.Length -1)
+        PlayerInfo info = SaveManager.LoadPlayerInfo();
+        if (info != null)
         {
-            m_CassetAnimator.SetTrigger("Out");
-            StartCoroutine(Forward());
+            if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < info.Level + 1)
+            {
+                m_CassetAnimator.SetTrigger("Out");
+                StartCoroutine(Forward());
+            }
+        }
+        else 
+        {
+            if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < 2)
+            {
+                m_CassetAnimator.SetTrigger("Out");
+                StartCoroutine(Forward());
+            }
         }
     }
 

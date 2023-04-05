@@ -531,6 +531,7 @@ MonoBehaviour:
   AllUnlockedSkins: 
   CurrentSkin: 0
   SkinToBuy: 0
+  ItemCost: 0
 --- !u!4 &884256699
 Transform:
   m_ObjectHideFlags: 0

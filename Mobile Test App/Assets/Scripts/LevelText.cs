@@ -13,7 +13,14 @@ public class LevelText : MonoBehaviour
         m_LevelText = GameObject.Find("Level text").GetComponent<TMP_Text>();
 
         PlayerInfo info = SaveManager.LoadPlayerInfo();
-        m_LevelText.text = "Level: " + info.Level.ToString();
+        if (info != null)
+        {
+            m_LevelText.text = "Level: " + info.Level.ToString();
+        }
+        else 
+        {
+            m_LevelText.text = "Level: " + 1.ToString();
+        }
     }
 
 
