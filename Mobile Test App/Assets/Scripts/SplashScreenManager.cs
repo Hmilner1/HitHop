@@ -31,6 +31,7 @@ public class SplashScreenManager : MonoBehaviour
     public void OnClickStart()
     {
         SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("DailyLogIn", LoadSceneMode.Additive);
         GameObject newAudioManager =  Instantiate(m_AudioManager);
         GameObject newSongManager =  Instantiate(m_SongManager);
         //GameObject newSaveManager = Instantiate(m_SaveManager);
