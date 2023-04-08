@@ -68,6 +68,12 @@ public class SceneMan : MonoBehaviour
         SceneManager.UnloadSceneAsync("ProgressionPath");
     }
 
+    public void UnloadDailyLogin()
+    {
+        AudioManager.instance.PlayOneShot(FmodEvents.instance.MenuSound, this.transform.position);
+        SceneManager.UnloadSceneAsync("DailyLogIn");
+    }
+
     public void OnClickSkinMenu()
     {
         AudioManager.instance.PlayOneShot(FmodEvents.instance.MenuSound, this.transform.position);
