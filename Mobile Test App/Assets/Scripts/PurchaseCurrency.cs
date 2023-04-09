@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PurchaseCurrency : MonoBehaviour
 {
@@ -14,4 +15,11 @@ public class PurchaseCurrency : MonoBehaviour
     {
         OnPurchaseDisc?.Invoke(ButtonAmount);
     }
+
+    public void DisableButton()
+    { 
+        Button currentButton = this.GetComponent<Button>();
+        currentButton.interactable= false;
+    }
+   
 }

@@ -14,7 +14,7 @@ public class SplashScreenManager : MonoBehaviour
 
     private void Awake()
     {
-        //Debug.Log(Application.persistentDataPath);
+        Debug.Log(Application.persistentDataPath);
         AudioSettings settings = SaveManager.LoadAudioSettings();
         if (settings != null)
         {

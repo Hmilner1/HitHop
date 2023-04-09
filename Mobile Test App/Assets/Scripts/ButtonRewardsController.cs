@@ -13,12 +13,18 @@ public class ButtonRewardsController : MonoBehaviour
 
         GameTimeInfo Info = SaveManager.LoadTime();
 
-        for (int i = 0; i < 31; i++)
+        for (int i = 1; i < 31; i++)
         {
             buttonRewards[i].GetComponent<Image>().color = new Color(buttonRewards[i].GetComponent<Image>().color.r, buttonRewards[i].GetComponent<Image>().color.g, buttonRewards[i].GetComponent<Image>().color.b, 0.5f);
+            buttonRewards[i].interactable = false;
+
             if (i < Info.DaysLogged)
             {
                 buttonRewards[i].GetComponent<Image>().color = new Color(buttonRewards[i].GetComponent<Image>().color.r, buttonRewards[i].GetComponent<Image>().color.g, buttonRewards[i].GetComponent<Image>().color.b, 1f);
+                if (i == Info.DaysLogged)
+                {
+                    buttonRewards[i].interactable = true;
+                }
             }
         }
 
