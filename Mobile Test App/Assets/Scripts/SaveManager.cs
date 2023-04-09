@@ -135,4 +135,36 @@ public static class SaveManager
             return null;
         }
     }
+
+    public static void SaveTime(DailyLoginManager DailyLogin)
+    {
+        BinaryFormatter PlayerFormatter = new BinaryFormatter();
+        string PlayerPath = Application.persistentDataPath + "/Time.data";
+        FileStream fileStream = new FileStream(PlayerPath, FileMode.Create);
+
+        GameTimeInfo settings = new GameTimeInfo(DailyLogin);
+
+
+        PlayerFormatter.Serialize(fileStream, settings);
+        fileStream.Close();
+    }
+
+    public static GameTimeInfo LoadTime()
+    {
+        string PlayerPath = Application.persistentDataPath + "/Time.data";
+        if (File.Exists(PlayerPath))
+        {
+            BinaryFormatter PlayerFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(PlayerPath, FileMode.Open);
+
+            GameTimeInfo Settings = PlayerFormatter.Deserialize(fileStream) as GameTimeInfo;
+            fileStream.Close();
+            return Settings;
+        }
+        else
+        {
+            Debug.Log("Audio save not found");
+            return null;
+        }
+    }
 }

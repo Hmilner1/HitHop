@@ -31,7 +31,6 @@ public class SplashScreenManager : MonoBehaviour
     public void OnClickStart()
     {
         SceneManager.LoadScene("StartMenu");
-        //SceneManager.LoadScene("DailyLogIn", LoadSceneMode.Additive);
         GameObject newAudioManager =  Instantiate(m_AudioManager);
         GameObject newSongManager =  Instantiate(m_SongManager);
         //GameObject newSaveManager = Instantiate(m_SaveManager);
@@ -39,8 +38,11 @@ public class SplashScreenManager : MonoBehaviour
         newSongManager.name = newSongManager.name.Replace("(Clone)", "").Trim();
         //newSaveManager.name = newSaveManager.name.Replace("(Clone)", "").Trim();
         AudioSettings settings = SaveManager.LoadAudioSettings();
-        AudioManager.instance.m_MasterVolume = settings.Master;
-        AudioManager.instance.m_Music = settings.Music;
-        AudioManager.instance.m_SFX = settings.Sfx;
+        if (settings != null)
+        {
+            AudioManager.instance.m_MasterVolume = settings.Master;
+            AudioManager.instance.m_Music = settings.Music;
+            AudioManager.instance.m_SFX = settings.Sfx;
+        }
     }
 }
