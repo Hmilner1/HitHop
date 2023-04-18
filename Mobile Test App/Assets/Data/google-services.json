@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "639137013894",
+    "project_id": "hithop-11d53",
+    "storage_bucket": "hithop-11d53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639137013894:android:20aa2bbd93cbdd62327107",
+        "android_client_info": {
+          "package_name": "com.TestBuild.HitHop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639137013894-h7tk9r9k86d0hj2tmjesct28ie8ej4gk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMuYYbGaEAL0wG_NpJUXoBtki-q6CMCxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639137013894-h7tk9r9k86d0hj2tmjesct28ie8ej4gk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639137013894-ber7u0cmkdm641a4ardqav75kok8ma1i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.TestBuild.HitHop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
