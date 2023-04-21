@@ -73,6 +73,18 @@ public class SceneMan : MonoBehaviour
         SceneManager.UnloadSceneAsync("DailyLogIn");
     }
 
+    public void OnClickLogInButton()
+    {
+        //AudioManager.instance.PlayOneShot(FmodEvents.instance.MenuSound, this.transform.position);
+        SceneManager.LoadScene("UserLogIn", LoadSceneMode.Additive);
+    }
+    public void OnClickUnLoadLogInButton()
+    {
+        //AudioManager.instance.PlayOneShot(FmodEvents.instance.MenuSound, this.transform.position);
+        SceneManager.UnloadSceneAsync("UserLogIn");
+    }
+
+
     public void OnClickSkinMenu()
     {
         AudioManager.instance.PlayOneShot(FmodEvents.instance.MenuSound, this.transform.position);

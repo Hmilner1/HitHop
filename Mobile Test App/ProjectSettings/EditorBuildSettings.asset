@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DailyLogIn.unity
     guid: 888f834b14c164440993ccd6a46e56cb
+  - enabled: 1
+    path: Assets/Scenes/UserLogIn.unity
+    guid: 81a2423a5127fa341bf4aa711d5479eb
   m_configObjects: {}
