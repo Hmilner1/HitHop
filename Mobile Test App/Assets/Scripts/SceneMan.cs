@@ -96,4 +96,10 @@ public class SceneMan : MonoBehaviour
         AudioManager.instance.PlayOneShot(FmodEvents.instance.MenuSound, this.transform.position);
         SceneManager.UnloadSceneAsync("SkinMenu");
     }
+
+    public void OnClickCloseErrorMessege()
+    {
+        GameObject m_ErrorBox = GameObject.Find("purchase Failed");
+        m_ErrorBox.SetActive(false);
+    }
 }

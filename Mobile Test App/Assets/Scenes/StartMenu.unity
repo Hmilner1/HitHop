@@ -2343,6 +2343,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause
       objectReference: {fileID: 0}
+    - target: {fileID: 7438741063176086396, guid: 749d9e88cd4427b45a035faa01a761fd, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438741063176086396, guid: 749d9e88cd4427b45a035faa01a761fd, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438741063176086396, guid: 749d9e88cd4427b45a035faa01a761fd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7438741063176086398, guid: 749d9e88cd4427b45a035faa01a761fd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2431,6 +2443,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 313414395}
+    - target: {fileID: 7438741064146168888, guid: 749d9e88cd4427b45a035faa01a761fd, type: 3}
+      propertyPath: m_text
+      value: II
+      objectReference: {fileID: 0}
     - target: {fileID: 7438741064146168888, guid: 749d9e88cd4427b45a035faa01a761fd, type: 3}
       propertyPath: m_fontColor.b
       value: 0.73333335
