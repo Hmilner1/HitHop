@@ -8,9 +8,9 @@ using Firebase.Firestore;
 public class PlayerInfoCloud
 {
     [FirestoreProperty]
-    public float TotalXP { get; set; }
+    public float CTotalXP { get; set; }
     [FirestoreProperty]
-    public float Level { get; set; }
+    public float CLevel { get; set; }
     [FirestoreProperty]
-    public string Name { get; set; }
+    public string CName { get; set; }
 }

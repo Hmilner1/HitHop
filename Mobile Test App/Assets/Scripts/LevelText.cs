@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Firebase.Auth;
+using Firebase.Firestore;
+using Firebase.Extensions;
+using UnityEngine.Assertions;
 
 public class LevelText : MonoBehaviour
 {
@@ -15,7 +19,23 @@ public class LevelText : MonoBehaviour
         PlayerInfo info = SaveManager.LoadPlayerInfo();
         if (info != null)
         {
-            m_LevelText.text = "Level: " + info.Level.ToString();
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+                var firestore = FirebaseFirestore.DefaultInstance;
+
+                firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                {
+                    Assert.IsNull(task.Exception);
+
+                    var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+                    m_LevelText.text = "Level: " + playerInfo.CLevel.ToString();
+                });
+            }
+            else
+            {
+                m_LevelText.text = "Level: " + info.Level.ToString();
+            }
         }
         else 
         {

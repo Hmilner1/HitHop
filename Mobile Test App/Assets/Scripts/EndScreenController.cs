@@ -5,6 +5,10 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using Unity.VisualScripting;
+using Firebase.Auth;
+using Firebase.Firestore;
+using Firebase.Extensions;
+using UnityEngine.Assertions;
 
 public class EndScreenController : MonoBehaviour
 {
@@ -41,13 +45,46 @@ public class EndScreenController : MonoBehaviour
         PlayerInfo info = SaveManager.LoadPlayerInfo();
         if (info != null)
         {
-            TotalXP = info.TotalXP;
-            Level = info.Level;
-            Name = info.Name;  
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+                var firestore = FirebaseFirestore.DefaultInstance;
+
+                firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                {
+                    Assert.IsNull(task.Exception);
+
+                    var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+                    TotalXP = playerInfo.CTotalXP;
+                    Level = playerInfo.CLevel;
+                    Name = playerInfo.CName;
+
+                });
+            }
+            else
+            {
+                TotalXP = info.TotalXP;
+                Level = info.Level;
+                Name = info.Name;
+            }
         }
         else
         {
             SaveManager.SavePlayerInfo(this);
+
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+                var playerInfo = new PlayerInfoCloud
+                {
+                    CTotalXP = info.TotalXP,
+                    CLevel = info.Level,
+                    CName = info.Name,
+
+                };
+                var firestore = FirebaseFirestore.DefaultInstance;
+                firestore.Document(playerInfoPath).SetAsync(playerInfo);
+            }
         }
         m_PlayerName.text = Name;  
         m_ScoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
@@ -64,13 +101,23 @@ public class EndScreenController : MonoBehaviour
             TempXp = TempXp - Convert.ToSingle(CalculateXP());
             Level = Level + 1;
             SaveManager.SavePlayerInfo(this);
+
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+                var playerInfo = new PlayerInfoCloud
+                {
+                    CLevel = Level
+                };
+                var firestore = FirebaseFirestore.DefaultInstance;
+                firestore.Document(playerInfoPath).SetAsync(playerInfo);
+            }
         }
         else if (TempXp <= CalculateXP())
         {
             if (m_XpBar.value <= TempXp)
             {
                 m_XpBar.maxValue = Convert.ToSingle(CalculateXP());
-                //m_XpBar.value = m_XpBar.value + 100 * Time.deltaTime;
                 m_XpBar.value = Mathf.Lerp(m_XpBar.value, TempXp, Time.deltaTime*1);
             }
         }
@@ -84,6 +131,17 @@ public class EndScreenController : MonoBehaviour
         TotalXP = TotalXP + CalculateXPToGive();
         TempXp = TotalXP;
         SaveManager.SavePlayerInfo(this);
+
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+        {
+            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+            var playerInfo = new PlayerInfoCloud
+            {
+                CTotalXP = TotalXP
+            };
+            var firestore = FirebaseFirestore.DefaultInstance;
+            firestore.Document(playerInfoPath).SetAsync(playerInfo);
+        }
     }
 
     private double CalculateXP()

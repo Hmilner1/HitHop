@@ -9,6 +9,7 @@ public class SettingsContol : MonoBehaviour
 {
     private Button m_HomeButton;
     private Button m_RestartButton;
+    private Button m_LogInButton;
     [SerializeField]
     private Toggle m_BatteryToggle;
     [SerializeField]
@@ -36,6 +37,9 @@ public class SettingsContol : MonoBehaviour
         m_RestartButton = GameObject.Find("Restart Button").GetComponent<Button>();
         m_RestartButton.gameObject.SetActive(false);
 
+        m_LogInButton = GameObject.Find("Login Button").GetComponent<Button>();
+        m_LogInButton.gameObject.SetActive(true);
+
         Scene[] scenes = SceneManager.GetAllScenes();
         foreach (Scene scene in scenes)
         {
@@ -43,11 +47,13 @@ public class SettingsContol : MonoBehaviour
             {
                 m_HomeButton.gameObject.SetActive(true);
                 m_RestartButton.gameObject.SetActive(true);
+                m_LogInButton.gameObject.SetActive(false);
             }
             else if (scene.name == "TutorialLevel")
             {
                 m_HomeButton.gameObject.SetActive(true);
                 m_RestartButton.gameObject.SetActive(true);
+                m_LogInButton.gameObject.SetActive(false);
             }
         }
     }
