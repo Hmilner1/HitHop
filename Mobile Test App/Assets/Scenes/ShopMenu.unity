@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrencyText: {fileID: 395061021}
-  CurrencyAmount: 99999
+  CurrencyAmount: 0
 --- !u!1 &447552909
 GameObject:
   m_ObjectHideFlags: 0

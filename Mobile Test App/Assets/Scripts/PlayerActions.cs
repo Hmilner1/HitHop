@@ -1,8 +1,12 @@
+using Firebase.Auth;
+using Firebase.Firestore;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Firebase.Extensions;
+using UnityEngine.Assertions;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -25,8 +29,8 @@ public class PlayerActions : MonoBehaviour
     private float MaxBeats;
     [SerializeField]
     private float m_LerpAmount;
-    private float Accuracy;
-    private bool multiTouch;
+    //private float Accuracy;
+    //private bool multiTouch;
 
     public delegate void AddPoint(int Score, int CurrentCombo);
     public static event AddPoint OnAddPoint;
@@ -67,16 +71,44 @@ public class PlayerActions : MonoBehaviour
         BeatDestroyed = false;
         m_Clicked = false;
         m_Jump = false;
-        multiTouch = false;
+        //multiTouch = false;
         m_PlayerInputs = new PlayerInputs();
 
         PlayerSkin info = SaveManager.LoadPlayerSkin();
-       // if (info.CurrentSkin != null)
-       // {
-            for(int i = 0; i < PlayerSkins.Length; i++)
+
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+        {
+            string skinInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/SkinData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+
+            firestore.Document(skinInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                Assert.IsNull(task.Exception);
+
+                var SkinInfo = task.Result.ConvertTo<PlayerSkinCloud>();
+
+                for (int i = 0; i < PlayerSkins.Length; i++)
+                {
+
+                    if (i == SkinInfo.CurrentSkin)
+                    {
+                        PlayerSkins[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Destroy(PlayerSkins[i]);
+                    }
+                }
+                m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
+
+            });
+        }
+        else
+        {
+            for (int i = 0; i < PlayerSkins.Length; i++)
             {
 
-                if ( i == info.CurrentSkin)
+                if (i == info.CurrentSkin)
                 {
                     PlayerSkins[i].SetActive(true);
                 }
@@ -84,8 +116,9 @@ public class PlayerActions : MonoBehaviour
                 {
                     Destroy(PlayerSkins[i]);
                 }
+                m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
             }
-        //}
+        }
     }
 
     private void Start()
@@ -94,14 +127,16 @@ public class PlayerActions : MonoBehaviour
         BeatsHit = 0;
         m_Score = 0;
         m_Player = GameObject.Find("Player");
-        m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
     }
     private void FixedUpdate()
     {
         AddAPoint();
         if (m_Jump)
         {
-            m_CharacterAnimator.SetTrigger("Jump");
+            if (m_CharacterAnimator != null)
+            {
+                m_CharacterAnimator.SetTrigger("Jump");
+            }
             m_timer = m_timer - 1f * Time.deltaTime;
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, m_LerpAmount * Time.deltaTime);
         }
@@ -110,14 +145,20 @@ public class PlayerActions : MonoBehaviour
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionLow.transform.position, m_LerpAmount * Time.deltaTime);
             m_Jump = false;
             m_timer = m_TimerTime;
-            m_CharacterAnimator.SetTrigger("Running");
+            if (m_CharacterAnimator != null)
+            {
+                m_CharacterAnimator.SetTrigger("Running");
+            }
         }
         if (m_timer <= 0f)
         {
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionLow.transform.position, m_LerpAmount * Time.deltaTime);
             m_Jump = false;
             m_timer = m_TimerTime;
-            m_CharacterAnimator.SetTrigger("Running");
+            if (m_CharacterAnimator != null)
+            {
+                m_CharacterAnimator.SetTrigger("Running");
+            }
         }
     }
     private void Move(Vector2 position)

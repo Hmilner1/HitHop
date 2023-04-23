@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System.Net.NetworkInformation;
-using System;
+using Firebase.Auth;
+using Firebase.Firestore;
+using Firebase.Extensions;
+using UnityEngine.Assertions;
 
 public class CurrencyManager : MonoBehaviour
 {
@@ -33,15 +32,41 @@ public class CurrencyManager : MonoBehaviour
         TokenSave info = SaveManager.LoadToken();
         if (info != null)
         {
-            CurrencyAmount = info.OwnedCurrencyAmount;
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+                var firestore = FirebaseFirestore.DefaultInstance;
+                firestore.Document(tokenPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                {
+                    Assert.IsNull(task.Exception);
+
+                    var tokenInfo = task.Result.ConvertTo<TokenSaveCloud>();
+                    CurrencyAmount = tokenInfo.OwnedCurrencyAmount;
+                    CurrencyText.text = CurrencyAmount.ToString();
+                });
+            }
+            else
+            {
+                CurrencyAmount = info.OwnedCurrencyAmount;
+            }
         }
         else
         {
             SaveManager.SaveToken(this);
+
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+                var tokenInfo = new TokenSaveCloud
+                {
+                    OwnedCurrencyAmount = info.OwnedCurrencyAmount,
+                };
+                var firestore = FirebaseFirestore.DefaultInstance;
+                firestore.Document(tokenPath).SetAsync(tokenInfo);
+            }
+
         }
-        //CurrencyAmount = Int32.Parse(CurrencyText.text.ToString());
         CurrencyText.text = CurrencyAmount.ToString();
-        //Debug.Log(CurrencyAmount);
     }
 
     public void OnPurchase(int CostAmount, int SkinNum)
@@ -50,6 +75,19 @@ public class CurrencyManager : MonoBehaviour
         {
             CurrencyAmount = CurrencyAmount - CostAmount;
             SaveManager.SaveToken(this);
+
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+                TokenSave info = SaveManager.LoadToken();
+                var tokenInfo = new TokenSaveCloud
+                {
+                    OwnedCurrencyAmount = info.OwnedCurrencyAmount,
+                };
+                var firestore = FirebaseFirestore.DefaultInstance;
+                firestore.Document(tokenPath).SetAsync(tokenInfo);
+            }
+
             CurrencyText.text = CurrencyAmount.ToString();
             OnCurrencyCheck?.Invoke(SkinNum);
         }
@@ -59,6 +97,18 @@ public class CurrencyManager : MonoBehaviour
     { 
         CurrencyAmount = CurrencyAmount + Amount;
         SaveManager.SaveToken(this);
+
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+        {
+            string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+            TokenSave info = SaveManager.LoadToken();
+            var tokenInfo = new TokenSaveCloud
+            {
+                OwnedCurrencyAmount = info.OwnedCurrencyAmount,
+            };
+            var firestore = FirebaseFirestore.DefaultInstance;
+            firestore.Document(tokenPath).SetAsync(tokenInfo); 
+        }
         CurrencyText.text = CurrencyAmount.ToString();
     }
 

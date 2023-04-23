@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Firebase.Auth;
+using Firebase.Firestore;
 
 public static class SaveManager
 {
@@ -167,4 +169,6 @@ public static class SaveManager
             return null;
         }
     }
+
+
 }
