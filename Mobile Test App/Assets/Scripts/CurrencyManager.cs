@@ -69,6 +69,32 @@ public class CurrencyManager : MonoBehaviour
         CurrencyText.text = CurrencyAmount.ToString();
     }
 
+    private void Update()
+    {
+        TokenSave info = SaveManager.LoadToken();
+        if (info != null)
+        {
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            {
+                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+                var firestore = FirebaseFirestore.DefaultInstance;
+                firestore.Document(tokenPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                {
+                    Assert.IsNull(task.Exception);
+
+                    var tokenInfo = task.Result.ConvertTo<TokenSaveCloud>();
+                    CurrencyAmount = tokenInfo.OwnedCurrencyAmount;
+                    CurrencyText.text = CurrencyAmount.ToString();
+                });
+            }
+            else
+            {
+                CurrencyAmount = info.OwnedCurrencyAmount;
+                CurrencyText.text = CurrencyAmount.ToString();
+            }
+        }
+    }
+
     public void OnPurchase(int CostAmount, int SkinNum)
     {
         if (CurrencyAmount >= CostAmount)

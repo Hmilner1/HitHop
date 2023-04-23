@@ -99,6 +99,7 @@ public class PlayerActions : MonoBehaviour
                         Destroy(PlayerSkins[i]);
                     }
                 }
+                m_Player = GameObject.Find("Player");
                 m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
 
             });
@@ -116,8 +117,9 @@ public class PlayerActions : MonoBehaviour
                 {
                     Destroy(PlayerSkins[i]);
                 }
-                m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
             }
+            m_Player = GameObject.Find("Player");
+            m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
         }
     }
 
@@ -126,7 +128,6 @@ public class PlayerActions : MonoBehaviour
         MaxBeats = m_beatspawner.m_BeatsNeeded; 
         BeatsHit = 0;
         m_Score = 0;
-        m_Player = GameObject.Find("Player");
     }
     private void FixedUpdate()
     {
@@ -141,8 +142,11 @@ public class PlayerActions : MonoBehaviour
             m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionHigh.transform.position, m_LerpAmount * Time.deltaTime);
         }
         else if (!m_Jump)
-        { 
-            m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionLow.transform.position, m_LerpAmount * Time.deltaTime);
+        {
+            if (m_Player != null)
+            {
+                m_Player.transform.position = Vector2.Lerp(m_Player.transform.position, m_MovePositionLow.transform.position, m_LerpAmount * Time.deltaTime);
+            }
             m_Jump = false;
             m_timer = m_TimerTime;
             if (m_CharacterAnimator != null)
