@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Firebase.Auth;
+using Firebase.Firestore;
+using UnityEngine.Assertions;
+using Firebase.Extensions;
 
 public class Song : MonoBehaviour
 {
@@ -62,20 +66,52 @@ public class Song : MonoBehaviour
     public void OnClickForward()
     {
         PlayerInfo info = SaveManager.LoadPlayerInfo();
-        if (info != null)
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < info.Level + 1)
+            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+
+            firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
             {
-                m_CassetAnimator.SetTrigger("Out");
-                StartCoroutine(Forward());
-            }
+                Assert.IsNull(task.Exception);
+
+                var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+
+                if (info != null)
+                {
+                    if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < playerInfo.CLevel + 1)
+                    {
+                        m_CassetAnimator.SetTrigger("Out");
+                        StartCoroutine(Forward());
+                    }
+                }
+                else
+                {
+                    if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < 2)
+                    {
+                        m_CassetAnimator.SetTrigger("Out");
+                        StartCoroutine(Forward());
+                    }
+                }
+            });
         }
-        else 
+        else
         {
-            if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < 2)
+            if (info != null)
             {
-                m_CassetAnimator.SetTrigger("Out");
-                StartCoroutine(Forward());
+                if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < info.Level + 1)
+                {
+                    m_CassetAnimator.SetTrigger("Out");
+                    StartCoroutine(Forward());
+                }
+            }
+            else
+            {
+                if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < 2)
+                {
+                    m_CassetAnimator.SetTrigger("Out");
+                    StartCoroutine(Forward());
+                }
             }
         }
     }

@@ -24,7 +24,7 @@ public class EndScreenController : MonoBehaviour
     private float ScoreAchived;
 
     //Player Save Data
-    public float TotalXP = 0;
+    public float TotalXP;
     public float Level = 1;
     public string Name = "Name";
 
@@ -55,7 +55,7 @@ public class EndScreenController : MonoBehaviour
                     Assert.IsNull(task.Exception);
 
                     var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
-                    TotalXP = playerInfo.CTotalXP;
+                    TotalXP = info.TotalXP;
                     Level = playerInfo.CLevel;
                     Name = playerInfo.CName;
 
@@ -77,9 +77,8 @@ public class EndScreenController : MonoBehaviour
                 string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
                 var playerInfo = new PlayerInfoCloud
                 {
-                    CTotalXP = info.TotalXP,
-                    CLevel = info.Level,
-                    CName = info.Name,
+                    CLevel = Level,
+                    CName = Name,
 
                 };
                 var firestore = FirebaseFirestore.DefaultInstance;
@@ -105,11 +104,11 @@ public class EndScreenController : MonoBehaviour
             if (FirebaseAuth.DefaultInstance.CurrentUser != null)
             {
                 string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+                var firestore = FirebaseFirestore.DefaultInstance;
                 var playerInfo = new PlayerInfoCloud
                 {
                     CLevel = Level
                 };
-                var firestore = FirebaseFirestore.DefaultInstance;
                 firestore.Document(playerInfoPath).SetAsync(playerInfo);
             }
         }
@@ -132,16 +131,7 @@ public class EndScreenController : MonoBehaviour
         TempXp = TotalXP;
         SaveManager.SavePlayerInfo(this);
 
-        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
-        {
-            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
-            var playerInfo = new PlayerInfoCloud
-            {
-                CTotalXP = TotalXP
-            };
-            var firestore = FirebaseFirestore.DefaultInstance;
-            firestore.Document(playerInfoPath).SetAsync(playerInfo);
-        }
+
     }
 
     private double CalculateXP()

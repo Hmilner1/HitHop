@@ -7,8 +7,8 @@ using Firebase.Firestore;
 [FirestoreData]
 public class PlayerInfoCloud
 {
-    [FirestoreProperty]
-    public float CTotalXP { get; set; }
+    //[FirestoreProperty]
+    //public float CTotalXP { get; set; }
     [FirestoreProperty]
     public float CLevel { get; set; }
     [FirestoreProperty]

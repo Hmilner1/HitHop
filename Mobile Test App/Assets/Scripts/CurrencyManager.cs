@@ -30,41 +30,41 @@ public class CurrencyManager : MonoBehaviour
     private void Start()
     {
         TokenSave info = SaveManager.LoadToken();
-        if (info != null)
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+            firestore.Document(tokenPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
             {
-                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
-                var firestore = FirebaseFirestore.DefaultInstance;
-                firestore.Document(tokenPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
-                {
-                    Assert.IsNull(task.Exception);
+                Assert.IsNull(task.Exception);
 
-                    var tokenInfo = task.Result.ConvertTo<TokenSaveCloud>();
-                    CurrencyAmount = tokenInfo.OwnedCurrencyAmount;
-                    CurrencyText.text = CurrencyAmount.ToString();
-                });
-            }
-            else
-            {
-                CurrencyAmount = info.OwnedCurrencyAmount;
-            }
+                var tokenInfo = task.Result.ConvertTo<TokenSaveCloud>();
+                CurrencyAmount = tokenInfo.OwnedCurrencyAmount;
+                CurrencyText.text = CurrencyAmount.ToString();
+            });
         }
         else
         {
-            SaveManager.SaveToken(this);
-
-            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            if (info != null)
             {
-                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
-                var tokenInfo = new TokenSaveCloud
-                {
-                    OwnedCurrencyAmount = info.OwnedCurrencyAmount,
-                };
-                var firestore = FirebaseFirestore.DefaultInstance;
-                firestore.Document(tokenPath).SetAsync(tokenInfo);
+                CurrencyAmount = info.OwnedCurrencyAmount;
             }
+            else
+            {
+                SaveManager.SaveToken(this);
 
+                if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+                {
+                    string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+                    var tokenInfo = new TokenSaveCloud
+                    {
+                        OwnedCurrencyAmount = info.OwnedCurrencyAmount,
+                    };
+                    var firestore = FirebaseFirestore.DefaultInstance;
+                    firestore.Document(tokenPath).SetAsync(tokenInfo);
+                }
+
+            }
         }
         CurrencyText.text = CurrencyAmount.ToString();
     }
@@ -72,22 +72,22 @@ public class CurrencyManager : MonoBehaviour
     private void Update()
     {
         TokenSave info = SaveManager.LoadToken();
-        if (info != null)
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+            string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+            firestore.Document(tokenPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
             {
-                string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
-                var firestore = FirebaseFirestore.DefaultInstance;
-                firestore.Document(tokenPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
-                {
-                    Assert.IsNull(task.Exception);
+                Assert.IsNull(task.Exception);
 
-                    var tokenInfo = task.Result.ConvertTo<TokenSaveCloud>();
-                    CurrencyAmount = tokenInfo.OwnedCurrencyAmount;
-                    CurrencyText.text = CurrencyAmount.ToString();
-                });
-            }
-            else
+                var tokenInfo = task.Result.ConvertTo<TokenSaveCloud>();
+                CurrencyAmount = tokenInfo.OwnedCurrencyAmount;
+                CurrencyText.text = CurrencyAmount.ToString();
+            });
+        }
+        else
+        {
+            if (info != null)
             {
                 CurrencyAmount = info.OwnedCurrencyAmount;
                 CurrencyText.text = CurrencyAmount.ToString();
