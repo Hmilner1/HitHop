@@ -49,17 +49,30 @@ public class EndScreenController : MonoBehaviour
             {
                 string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
                 var firestore = FirebaseFirestore.DefaultInstance;
-
-                firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                if (firestore.Document(playerInfoPath) != null)
                 {
-                    Assert.IsNull(task.Exception);
+                    firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                    {
+                        Assert.IsNull(task.Exception);
 
-                    var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
-                    TotalXP = info.TotalXP;
-                    Level = playerInfo.CLevel;
-                    Name = playerInfo.CName;
+                        var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+                        TotalXP = playerInfo.CTotalXP;
+                        Level = playerInfo.CLevel;
+                        Name = playerInfo.CName;
+                        Debug.Log(TotalXP);
 
-                });
+                    });
+                }
+                else
+                {
+                    var playerInfo = new PlayerInfoCloud
+                    {
+                        CLevel = Level,
+                        CName = Name,
+                        CTotalXP = TotalXP,
+                    };
+                    firestore.Document(playerInfoPath).SetAsync(playerInfo);
+                }
             }
             else
             {
@@ -79,7 +92,7 @@ public class EndScreenController : MonoBehaviour
                 {
                     CLevel = Level,
                     CName = Name,
-
+                    CTotalXP= TotalXP,
                 };
                 var firestore = FirebaseFirestore.DefaultInstance;
                 firestore.Document(playerInfoPath).SetAsync(playerInfo);
@@ -127,11 +140,9 @@ public class EndScreenController : MonoBehaviour
         ScoreAchived = Accuracy;
         m_ScoreText.text = "Score: " + Accuracy.ToString();
 
-        TotalXP = TotalXP + CalculateXPToGive();
-        TempXp = TotalXP;
+       // TotalXP = TotalXP + CalculateXPToGive();
+       // TempXp = TotalXP;
         SaveManager.SavePlayerInfo(this);
-
-
     }
 
     private double CalculateXP()
