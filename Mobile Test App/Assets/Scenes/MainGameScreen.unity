@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016790923, g: 0.0917913, b: 0.21105129, a: 1}
+  m_IndirectSpecularColor: {r: 0.016620137, g: 0.09154169, b: 0.21085434, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -365,7 +365,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 291c5a7b792e3934db293ec2c72c5d86, type: 2}
+  - {fileID: 2100000, guid: 0047a0356db1b474281bd3963be917b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -559,7 +559,7 @@ SpriteRenderer:
   m_Size: {x: 8.5, y: 4.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &122260203
@@ -2285,7 +2285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 291c5a7b792e3934db293ec2c72c5d86, type: 2}
+  - {fileID: 2100000, guid: 0047a0356db1b474281bd3963be917b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2831,7 +2831,7 @@ SpriteRenderer:
   m_Size: {x: 8.5, y: 4.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &795359932
@@ -3865,7 +3865,7 @@ SpriteRenderer:
   m_Size: {x: 8.5, y: 4.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1076447048
@@ -6632,7 +6632,7 @@ SpriteRenderer:
   m_Size: {x: 8.5, y: 4.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1937282455 stripped
@@ -6887,14 +6887,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026468895}
-  m_LocalRotation: {x: 0.73100585, y: -0.0039671473, z: 0.35228598, w: 0.58438796}
+  m_LocalRotation: {x: 0.2638179, y: -0.41815397, z: 0.7673815, w: 0.40825614}
   m_LocalPosition: {x: -5.5899396, y: -2.9242232, z: 4.0203185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 59.001, y: 97.674, z: 127.982}
+  m_LocalEulerAnglesHint: {x: 59.001, y: 7.079, z: 127.982}
 --- !u!4 &2036897597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4f628fe74d6938344a728dddbf0ea3c5, type: 3}
@@ -7179,7 +7179,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 291c5a7b792e3934db293ec2c72c5d86, type: 2}
+  - {fileID: 2100000, guid: 0047a0356db1b474281bd3963be917b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7276,7 +7276,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 291c5a7b792e3934db293ec2c72c5d86, type: 2}
+  - {fileID: 2100000, guid: 0047a0356db1b474281bd3963be917b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

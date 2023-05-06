@@ -3,6 +3,7 @@ using Firebase.Extensions;
 using Firebase.Firestore;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -37,15 +38,37 @@ public class ShopPurcahseButton : MonoBehaviour
         {
             string skinInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/SkinData";
             var firestore = FirebaseFirestore.DefaultInstance;
-
-            firestore.Document(skinInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            if (firestore.Document(skinInfoPath) == null)
             {
-                Assert.IsNull(task.Exception);
+                var skinInfo = new PlayerSkinCloud
+                {
+                    //OwnedCurrencyAmount = info.OwnedCurrencyAmount,
+                    AllOwnedSkins = AllUnlockedSkins,
+                    CurrentSkin = 0,
+                };
+                firestore.Document(skinInfoPath).SetAsync(skinInfo);
+            }
+            else
+            {
+                firestore.Document(skinInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+                {
+                    Assert.IsNull(task.Exception);
 
-                var SkinInfo = task.Result.ConvertTo<PlayerSkinCloud>();
-                CurrentSkin = SkinInfo.CurrentSkin;
+                    var SkinInfo = task.Result.ConvertTo<PlayerSkinCloud>();
+                    CurrentSkin = SkinInfo.CurrentSkin;
 
-            });
+                });
+            }
+
+            if (info != null)
+            {
+                CurrentSkin = info.CurrentSkin;
+            }
+            else
+            {
+                CurrentSkin = 0;
+                SaveManager.SavePlayerSkin(this);
+            }
         }
         else
         {
@@ -82,7 +105,10 @@ public class ShopPurcahseButton : MonoBehaviour
     {
         PlayerSkin info = SaveManager.LoadPlayerSkin();
         AllUnlockedSkins = info.AllOwnedSkins;
-        AllUnlockedSkins.Add(SkinNum);
+        if (CheckSkinList(SkinNum) == false)
+        {
+            AllUnlockedSkins.Add(SkinNum);
+        }
         SaveManager.SavePlayerSkin(this);
 
         if (FirebaseAuth.DefaultInstance.CurrentUser != null)
@@ -96,6 +122,18 @@ public class ShopPurcahseButton : MonoBehaviour
             var firestore = FirebaseFirestore.DefaultInstance;
             firestore.Document(skinInfoPath).SetAsync(skinInfo);
         }
+    }
+
+    private bool CheckSkinList(int Skin)
+    {
+        foreach (var sk in AllUnlockedSkins)
+        {
+            if (Skin == sk)
+            { 
+                return true;
+            }
+        }
+        return false;
     }
 
     public void SetActiveSkin(int Skin)

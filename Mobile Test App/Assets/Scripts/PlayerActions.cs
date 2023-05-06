@@ -87,6 +87,11 @@ public class PlayerActions : MonoBehaviour
 
                 var SkinInfo = task.Result.ConvertTo<PlayerSkinCloud>();
 
+                if (firestore.Document(skinInfoPath) == null)
+                {
+                    SkinInfo.CurrentSkin = 0;
+                }
+
                 for (int i = 0; i < PlayerSkins.Length; i++)
                 {
 
@@ -101,8 +106,9 @@ public class PlayerActions : MonoBehaviour
                 }
                 m_Player = GameObject.Find("Player");
                 m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
-
             });
+            m_Player = GameObject.Find("Player");
+            m_CharacterAnimator = m_Player.GetComponentInChildren<Animator>();
         }
         else
         {

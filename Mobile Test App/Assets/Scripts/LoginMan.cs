@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Auth;
+using Firebase.Firestore;
+using Firebase.Extensions;
+using UnityEngine.Assertions;
 
 public class LoginMan : MonoBehaviour
 {
@@ -12,6 +15,7 @@ public class LoginMan : MonoBehaviour
     GameObject m_LogInErrorText;
 
     TMP_InputField m_EmailRegister;
+    TMP_InputField m_UserNameRegister;
     TMP_InputField m_PasswordRegister;
     TMP_InputField m_ConfirmPasswordRegister;
     Button m_ConfirmRegButton;
@@ -24,6 +28,7 @@ public class LoginMan : MonoBehaviour
     {
         //register object gathering 
         m_EmailRegister = GameObject.Find("Register Email Text Field").GetComponent<TMP_InputField>();
+        m_UserNameRegister = GameObject.Find("Register UserName Field").GetComponent<TMP_InputField>();
         m_PasswordRegister = GameObject.Find("Register Pass Text Field").GetComponent<TMP_InputField>();
         m_ConfirmPasswordRegister = GameObject.Find("Confirm Pass Text Field").GetComponent<TMP_InputField>();
         m_ConfirmRegButton = GameObject.Find("Confirm Reg Button").GetComponent<Button>();
@@ -55,11 +60,14 @@ public class LoginMan : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(m_EmailRegister.text))
             {
-                if (!string.IsNullOrEmpty(m_PasswordRegister.text))
+                if (!string.IsNullOrEmpty(m_UserNameRegister.text))
                 {
-                    if (!string.IsNullOrEmpty(m_ConfirmPasswordRegister.text) && m_PasswordRegister.text == m_ConfirmPasswordRegister.text)
+                    if (!string.IsNullOrEmpty(m_PasswordRegister.text))
                     {
-                        m_ConfirmRegButton.interactable = true;
+                        if (!string.IsNullOrEmpty(m_ConfirmPasswordRegister.text) && m_PasswordRegister.text == m_ConfirmPasswordRegister.text)
+                        {
+                            m_ConfirmRegButton.interactable = true;
+                        }
                     }
                 }
             }
@@ -91,6 +99,15 @@ public class LoginMan : MonoBehaviour
         }
         else
         {
+            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+            var playerInfo = new PlayerInfoCloud
+            {
+                CName = m_UserNameRegister.text,
+                CLevel = 1,
+            };
+            firestore.Document(playerInfoPath).SetAsync(playerInfo);
+
             m_RegisterPanel.SetActive(false);
         }
     }
@@ -118,7 +135,16 @@ public class LoginMan : MonoBehaviour
             m_LogInErrorText.SetActive(true);
             var currentUser = FirebaseAuth.DefaultInstance.CurrentUser;
             TMP_Text errorText = m_LogInErrorText.GetComponent<TMP_Text>();
-            errorText.text = "Welcome " + currentUser.UserId.ToString();
+            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+
+            firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                Assert.IsNull(task.Exception);
+
+                var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+                errorText.text = "Welcome " + playerInfo.CName;
+            });
         }
     }
 

@@ -26,7 +26,7 @@ public class EndScreenController : MonoBehaviour
     //Player Save Data
     public float TotalXP = 0;
     public float Level = 1;
-    public string Name = "Name";
+    public string Name;
 
     private float TempXp;
     private bool LevelSaved;
@@ -57,6 +57,7 @@ public class EndScreenController : MonoBehaviour
                 var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
 
                 TotalXP = playerInfo.CTotalXP;
+                Name = playerInfo.CName;
             });
         }
         else if (FirebaseAuth.DefaultInstance.CurrentUser == null)
@@ -75,7 +76,6 @@ public class EndScreenController : MonoBehaviour
 
         LevelSaved = false;
         givenOutXp = false;
-        m_PlayerName.text = Name;
         m_ScoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
 
         Level = 1;
@@ -86,6 +86,7 @@ public class EndScreenController : MonoBehaviour
     {
         if (TotalXP > 0)
         {
+            m_PlayerName.text = Name;
             if (!givenOutXp)
             {
                 GivePlayerXp();
@@ -167,7 +168,8 @@ public class EndScreenController : MonoBehaviour
             var playerInfo = new PlayerInfoCloud
             {
                 CTotalXP = TotalXP,
-                CLevel = Level
+                CLevel = Level,
+                CName= Name,
             };
             firestore.Document(playerInfoPath).SetAsync(playerInfo);
         }

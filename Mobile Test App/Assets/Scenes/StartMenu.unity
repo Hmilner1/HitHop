@@ -2328,6 +2328,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Casset
       objectReference: {fileID: 0}
+    - target: {fileID: 5237773348418199257, guid: 2a6de89d092d00048a62dc2f88cb4ade, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 291c5a7b792e3934db293ec2c72c5d86, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6de89d092d00048a62dc2f88cb4ade, type: 3}
