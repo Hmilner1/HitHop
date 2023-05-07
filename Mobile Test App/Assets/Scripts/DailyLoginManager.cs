@@ -25,9 +25,7 @@ public class DailyLoginManager : MonoBehaviour
             m_CurrentTime = DateTime.Now;
             SaveManager.SaveTime(this);
         }
-        Debug.Log(m_DaysLoggedIn);
         m_CurrentTime = DateTime.Now;
-        Debug.Log(m_LastLoginTime);
         if (m_LastLoginTime.Year == 0001 )
         {
             SceneManager.LoadScene("DailyLogIn", LoadSceneMode.Additive);

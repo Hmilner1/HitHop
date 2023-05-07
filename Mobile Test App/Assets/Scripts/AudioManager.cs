@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
         if (instance != null)
         {
             Destroy(instance);
-            Debug.LogError("More than one Audio Manager Found!");
+            //Debug.LogError("More than one Audio Manager Found!");
         }
         instance = this;
         eventInstances = new List<EventInstance>();

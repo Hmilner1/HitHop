@@ -27,6 +27,10 @@ public class SplashScreenManager : MonoBehaviour
                 Application.targetFrameRate = 30;
             }
         }
+        else
+        {
+            Application.targetFrameRate = 120;
+        }
     }
     public void OnClickStart()
     {
