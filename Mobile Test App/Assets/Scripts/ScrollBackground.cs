@@ -16,10 +16,23 @@ public class ScrollBackground : MonoBehaviour
     private void Awake()
     {
         AudioSettings info = SaveManager.LoadAudioSettings();
-        if (info.MToggleState == true)
+        if (info != null)
+        {
+            if (info.MToggleState == true)
+            {
+                GameObject Background = GameObject.Find("Backgrounds");
+                Background.SetActive(false);
+            }
+            else
+            {
+                GameObject Background = GameObject.Find("Backgrounds");
+                Background.SetActive(true);
+            }
+        }
+        else 
         {
             GameObject Background = GameObject.Find("Backgrounds");
-            Background.SetActive(false);
+            Background.SetActive(true);
         }
     }
 

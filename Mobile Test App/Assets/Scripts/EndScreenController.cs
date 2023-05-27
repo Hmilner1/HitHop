@@ -145,10 +145,8 @@ public class EndScreenController : MonoBehaviour
         {
 
             TotalXP = TotalXP + CalculateXPToGive();
-            //TotalXP = TotalXP + 500;
             TempXp = TotalXP;
 
-            //Debug.Log("during give xp" + TotalXP);
         }
         else if(FirebaseAuth.DefaultInstance.CurrentUser == null)
         {

@@ -1,6 +1,7 @@
 using Firebase.Auth;
 using Firebase.Extensions;
 using Firebase.Firestore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -31,68 +32,15 @@ public class ShopPurcahseButton : MonoBehaviour
         CurrencyManager.OnCurrencyCheck -= CompletePurchase;
     }
 
-    private void Awake()
+    private void Start()
     {
-        PlayerSkin info = SaveManager.LoadPlayerSkin();
         if (FirebaseAuth.DefaultInstance.CurrentUser != null)
         {
-            string skinInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/SkinData";
-            var firestore = FirebaseFirestore.DefaultInstance;
-            if (firestore.Document(skinInfoPath) == null)
-            {
-                var skinInfo = new PlayerSkinCloud
-                {
-                    //OwnedCurrencyAmount = info.OwnedCurrencyAmount,
-                    AllOwnedSkins = AllUnlockedSkins,
-                    CurrentSkin = 0,
-                };
-                firestore.Document(skinInfoPath).SetAsync(skinInfo);
-            }
-            else
-            {
-                firestore.Document(skinInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
-                {
-                    Assert.IsNull(task.Exception);
-
-                    var SkinInfo = task.Result.ConvertTo<PlayerSkinCloud>();
-                    CurrentSkin = SkinInfo.CurrentSkin;
-
-                });
-            }
-
-            if (info != null)
-            {
-                CurrentSkin = info.CurrentSkin;
-            }
-            else
-            {
-                CurrentSkin = 0;
-                SaveManager.SavePlayerSkin(this);
-            }
+            FireBaseLogInRead();
         }
         else
         {
-            if (info != null)
-            {
-                CurrentSkin = info.CurrentSkin;
-            }
-            else
-            {
-                SaveManager.SavePlayerSkin(this);
-
-                if (FirebaseAuth.DefaultInstance.CurrentUser != null)
-                {
-                    string skinInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/SkinData";
-                    var skinInfo = new PlayerSkinCloud
-                    {
-                        //OwnedCurrencyAmount = info.OwnedCurrencyAmount,
-                        AllOwnedSkins = info.AllOwnedSkins,
-                        CurrentSkin = info.CurrentSkin,
-                    };
-                    var firestore = FirebaseFirestore.DefaultInstance;
-                    firestore.Document(skinInfoPath).SetAsync(skinInfo);
-                }
-            }
+            LocalLoginRead();
         }
     }
 
@@ -153,6 +101,45 @@ public class ShopPurcahseButton : MonoBehaviour
             };
             var firestore = FirebaseFirestore.DefaultInstance;
             firestore.Document(skinInfoPath).SetAsync(skinInfo);
+        }
+    }
+
+    private void FireBaseLogInRead()
+    {
+        PlayerSkin info = SaveManager.LoadPlayerSkin();
+        string skinInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/SkinData";
+        var firestore = FirebaseFirestore.DefaultInstance;
+
+        firestore.Document(skinInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            Assert.IsNull(task.Exception);
+
+            var SkinInfo = task.Result.ConvertTo<PlayerSkinCloud>();
+            CurrentSkin = SkinInfo.CurrentSkin;
+
+        });
+
+        if (info != null)
+        {
+            CurrentSkin = info.CurrentSkin;
+        }
+        else
+        {
+            CurrentSkin = 0;
+            SaveManager.SavePlayerSkin(this);
+        }
+    }
+
+    private void LocalLoginRead()
+    {
+        PlayerSkin info = SaveManager.LoadPlayerSkin();
+        if (info != null)
+        {
+            CurrentSkin = info.CurrentSkin;
+        }
+        else
+        {
+            SaveManager.SavePlayerSkin(this);
         }
     }
 }

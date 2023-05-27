@@ -17,27 +17,26 @@ public class LevelText : MonoBehaviour
         m_LevelText = GameObject.Find("Level text").GetComponent<TMP_Text>();
 
         PlayerInfo info = SaveManager.LoadPlayerInfo();
+        if (FirebaseAuth.DefaultInstance.CurrentUser != null)
+        {
+            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+            var firestore = FirebaseFirestore.DefaultInstance;
+
+            firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                Assert.IsNull(task.Exception);
+
+                var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+                m_LevelText.text = "Level: " + playerInfo.CLevel.ToString();
+            });
+        }
         if (info != null)
         {
-            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
-            {
-                string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
-                var firestore = FirebaseFirestore.DefaultInstance;
 
-                firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
-                {
-                    Assert.IsNull(task.Exception);
+            m_LevelText.text = "Level: " + info.Level.ToString();
 
-                    var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
-                    m_LevelText.text = "Level: " + playerInfo.CLevel.ToString();
-                });
-            }
-            else
-            {
-                m_LevelText.text = "Level: " + info.Level.ToString();
-            }
         }
-        else 
+        else
         {
             m_LevelText.text = "Level: " + 1.ToString();
         }

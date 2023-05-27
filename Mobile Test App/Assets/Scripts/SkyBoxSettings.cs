@@ -11,13 +11,16 @@ public class SkyBoxSettings : MonoBehaviour
     void Start()
     {
         AudioSettings info = SaveManager.LoadAudioSettings();
-        if (info.MToggleState == false)
+        if (info != null)
         {
-            start = true;
-        }
-        else
-        { 
-            start= false; 
+            if (info.MToggleState == false)
+            {
+                start = true;
+            }
+            else
+            {
+                start = false;
+            }
         }
     }
 

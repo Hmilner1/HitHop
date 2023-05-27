@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.016620137, g: 0.09154169, b: 0.21085434, a: 1}
+  m_IndirectSpecularColor: {r: 0.016694384, g: 0.09165567, b: 0.21092239, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2087,7 +2087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1728013695380148634, guid: 14fe1c761de16ac4ea021c85e90f8597, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2953604236389334553, guid: 14fe1c761de16ac4ea021c85e90f8597, type: 3}
       propertyPath: m_DirtyAABB
@@ -6715,6 +6715,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test
       objectReference: {fileID: 0}
+    - target: {fileID: 6460124455334226332, guid: 2bc3ecda39aaa8d4982d1b69a87eff49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8229635305602005499, guid: 2bc3ecda39aaa8d4982d1b69a87eff49, type: 3}
       propertyPath: m_WarningMessage
       value: "\nBinding warning: Some generic clip(s) animate transforms that are
@@ -7613,24 +7617,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: PlayerSkins.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: PlayerSkins.Array.data[0]
       value: 
-      objectReference: {fileID: 1954705055}
+      objectReference: {fileID: 591851423}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: PlayerSkins.Array.data[1]
       value: 
-      objectReference: {fileID: 373313134}
+      objectReference: {fileID: 1386523899}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: PlayerSkins.Array.data[2]
       value: 
-      objectReference: {fileID: 591851423}
+      objectReference: {fileID: 373313134}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: PlayerSkins.Array.data[3]
       value: 
-      objectReference: {fileID: 1386523899}
+      objectReference: {fileID: 1954705055}
     - target: {fileID: 7326158488037971068, guid: c978d4ec50398254ca5065e646ce08c0, type: 3}
       propertyPath: beatDestroySound.Guid.Data1
       value: -1399098191

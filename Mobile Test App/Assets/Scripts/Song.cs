@@ -18,8 +18,9 @@ public class Song : MonoBehaviour
     [SerializeField]
     private float m_WaitTime;
 
+    private float m_PlayerLvl;
+
     private SongSO m_CurrentSong;
-    //private TMP_Text m_SongName;
     private SelectedSong m_SelectedSong;
     int m_SelectedIndex;
     private Animator m_CassetAnimator;
@@ -31,6 +32,7 @@ public class Song : MonoBehaviour
         m_SongName.text = m_CurrentSong.SongName;
         m_SelectedSong = GameObject.Find("SongManger").GetComponent<SelectedSong>();
         m_CassetAnimator = GameObject.Find("Casset").GetComponent<Animator>();
+        LoadFireBaseInfo();
     }
 
     private void Update()
@@ -71,29 +73,11 @@ public class Song : MonoBehaviour
             string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
             var firestore = FirebaseFirestore.DefaultInstance;
 
-            firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < m_PlayerLvl + 1)
             {
-                Assert.IsNull(task.Exception);
-
-                var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
-
-                if (info != null)
-                {
-                    if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < playerInfo.CLevel + 1)
-                    {
-                        m_CassetAnimator.SetTrigger("Out");
-                        StartCoroutine(Forward());
-                    }
-                }
-                else
-                {
-                    if (m_SelectedIndex < m_SongList.Length - 1 && m_SelectedIndex + 1 < 2)
-                    {
-                        m_CassetAnimator.SetTrigger("Out");
-                        StartCoroutine(Forward());
-                    }
-                }
-            });
+                m_CassetAnimator.SetTrigger("Out");
+                StartCoroutine(Forward());
+            }
         }
         else
         {
@@ -131,7 +115,6 @@ public class Song : MonoBehaviour
     {
         if (m_SelectedIndex > 0)
         {
-            //m_SelectedIndex--;
             m_CassetAnimator.SetTrigger("Out");
             StartCoroutine(Back());
         }
@@ -146,5 +129,20 @@ public class Song : MonoBehaviour
             m_CassetAnimator.SetTrigger("In");
             StopAllCoroutines();
         }
+    }
+
+    private void LoadFireBaseInfo()
+    {
+        string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+        var firestore = FirebaseFirestore.DefaultInstance;
+
+        firestore.Document(playerInfoPath).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            Assert.IsNull(task.Exception);
+
+            var playerInfo = task.Result.ConvertTo<PlayerInfoCloud>();
+            m_PlayerLvl = playerInfo.CLevel;
+        });
+
     }
 }

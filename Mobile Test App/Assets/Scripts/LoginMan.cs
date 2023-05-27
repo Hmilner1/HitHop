@@ -99,14 +99,7 @@ public class LoginMan : MonoBehaviour
         }
         else
         {
-            string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
-            var firestore = FirebaseFirestore.DefaultInstance;
-            var playerInfo = new PlayerInfoCloud
-            {
-                CName = m_UserNameRegister.text,
-                CLevel = 1,
-            };
-            firestore.Document(playerInfoPath).SetAsync(playerInfo);
+            SetUpAccountDetails();
 
             m_RegisterPanel.SetActive(false);
         }
@@ -152,4 +145,35 @@ public class LoginMan : MonoBehaviour
     { 
         m_RegisterPanel.SetActive(false);
     }
+
+    private void SetUpAccountDetails()
+    {
+        List<int> Skins = new List<int>();
+        Skins.Add(0);
+        string skinInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/SkinData";
+        var firestore = FirebaseFirestore.DefaultInstance;
+        var skinInfo = new PlayerSkinCloud
+        {
+            AllOwnedSkins = Skins,
+            CurrentSkin = 0
+        };
+        firestore.Document(skinInfoPath).SetAsync(skinInfo);
+
+        string tokenPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/TokenData";
+        var tokenInfo = new TokenSaveCloud
+        {
+            OwnedCurrencyAmount = 0,
+        };
+        firestore.Document(tokenPath).SetAsync(tokenInfo);
+
+        string playerInfoPath = FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/PlayerData";
+        var playerInfo = new PlayerInfoCloud
+        {
+            CName = m_UserNameRegister.text,
+            CLevel = 1,
+            CTotalXP = 1
+        };
+        firestore.Document(playerInfoPath).SetAsync(playerInfo);
+    }
+
 }

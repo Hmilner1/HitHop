@@ -242,13 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SkinButtons:
-  - {fileID: 1136401916}
   - {fileID: 1622058253}
   - {fileID: 1194404452}
   m_ImageObject: []
   m_Images:
-  - {fileID: 157439740}
-  - {fileID: 1136401919}
   - {fileID: 1194404455}
   - {fileID: 1622058256}
 --- !u!1 &157439737
@@ -265,12 +262,12 @@ GameObject:
   - component: {fileID: 157439742}
   - component: {fileID: 157439739}
   m_Layer: 5
-  m_Name: 0
+  m_Name: 0 Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &157439738
 RectTransform:
   m_ObjectHideFlags: 0
@@ -286,10 +283,10 @@ RectTransform:
   m_Father: {fileID: 84645397}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 281.5, y: -425}
+  m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157439739
 MonoBehaviour:
@@ -780,7 +777,7 @@ GameObject:
   - component: {fileID: 1136401921}
   - component: {fileID: 1136401918}
   m_Layer: 5
-  m_Name: 1
+  m_Name: 1 Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,12 +924,12 @@ GameObject:
   - component: {fileID: 1194404457}
   - component: {fileID: 1194404454}
   m_Layer: 5
-  m_Name: 2
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1194404453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -948,10 +945,10 @@ RectTransform:
   m_Father: {fileID: 84645397}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 281.5, y: -925}
-  m_SizeDelta: {x: 450, y: 450}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1194404454
 MonoBehaviour:
@@ -1059,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef63c3795fd16d64aa632ebd693a8836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkinIndex: 2
+  SkinIndex: 0
 --- !u!1 &1199350248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,6 +1216,7 @@ MonoBehaviour:
   AllUnlockedSkins: 
   CurrentSkin: 0
   SkinToBuy: 0
+  ItemCost: 0
 --- !u!1 &1256108974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,12 +1359,12 @@ GameObject:
   - component: {fileID: 1622058258}
   - component: {fileID: 1622058255}
   m_Layer: 5
-  m_Name: 3
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1622058254
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1382,10 +1380,10 @@ RectTransform:
   m_Father: {fileID: 84645397}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 781.5, y: -925}
-  m_SizeDelta: {x: 450, y: 450}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1622058255
 MonoBehaviour:
@@ -1493,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef63c3795fd16d64aa632ebd693a8836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkinIndex: 3
+  SkinIndex: 1
 --- !u!1 &2008479026
 GameObject:
   m_ObjectHideFlags: 0
